@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<title>Capital Bikeshare</title>
+<style>
+    html,
+    body {
+        height: 100%;
+        width: 100%;
+    }
+    body {
+        margin: 0;
+    }
+    #map {
+        width: 100%;
+        height: 100%;
+    }
+    svg {
+        position: relative;
+    }
+    path {
+        fill: none;
+        stroke-width: 2px;
+    }
+    path.true {
+        stroke:#FE0000;
+    }
+    path.false {
+        stroke:#990099;
+    }
+    circle {
+/*        fill: #FFCB00;*/
+        fill: #2467C8;
+    }
+    #timebox {
+        position:absolute;
+        height:200px;
+        width:300px;
+        top:0;
+        left:0;
+        z-index:10;
+        background:#000;
+        color:white;
+        margin:30px;
+        padding:30px;
+    }
+    .areaChart {
+        position: absolute;
+        bottom: 0;
+        background: #000;
+    }
+    .axis path,
+    .axis line {
+          fill: none;
+          stroke: #FFF;
+          shape-rendering: crispEdges;
+          stroke-width:1;
+    }
+    .axis text {
+      stroke:white;
+    }
+    .area {
+      fill: #3366FF;
+    }
+    .empty {
+        fill: #990099;
+    }
+    
+    @font-face {
+        font-family: OstrichSans-Black;
+        src: url("fonts/OstrichSans-Black.otf") format("opentype");
+    }
+    
+    .dateTimeBox {
+        position: absolute;
+        top: 40px;
+        left: 70px;
+        width: 3000px;  
+    }
+    
+    .timeBox {
+        position: absolute;
+        top: 110px;
+        left: 70px;
+        width: 3000px;  
+    }
+    
+    .box {
+        background: rgba(255, 255, 0255, 0.8);
+        padding: 10px;
+        box-sizing: border-box;
+        border-radius: 6px;
+/*        display:none;*/
+    }
+    
+    .titleText {
+        font-family: OstrichSans-Black, Lato, Arial, Helvetica, sans-serif;
+        font-size: 3.1em;
+        color: #333333;
+        background: rgba(255, 255, 255, 0.7);
+    }
+    
+</style>
+    
+<body>
+    
+
+    <div id="map">
+    </div>
+    
+    <div class="dateTimeBox">
+        <span class = "titleText">Capital Bikeshare</span>
+    </div>
+    <div class="timeBox"> 
+<!--        <span id = "startTime"></span>-->
+<!--        <span class = "timeFactor"></span>-->
+        <span class = "readableTime"></span>
+    </div>
+
+    <script src="js/moment.js"></script>
+    <script src="js/jquery-3.1.1.min.js"></script>
+    <script src="https://d3js.org/d3.v3.min.js"></script>
+    
+
+    <script src='https://api.tiles.mapbox.com/mapbox.js/v1.6.4/mapbox.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox.js/v1.6.4/mapbox.css' rel='stylesheet' />
+
+
+    <script>
+        
+//        var startTime = moment()
+        
+//        $('.startTime').html(5);
+        
+        var timeFactor = 5; //number of minutes in real life to a second in the viz
+        $('.timeFactor').html(timeFactor); //Displays the timeFactor in the UI.
+        
+
+        var tiles = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png',{
+      attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'
+    });
+
+        var map = L.map('map')
+            .addLayer(tiles)
+//            .setView([38.88869, -77.03237], 13);
+            .setView([38.9, -77.06], 13);
+
+        var svg = d3.select(map.getPanes().overlayPane).append("svg"),
+            g = svg.append("g").attr("class", "leaflet-zoom-hide");
+
+        var transform = d3.geo.transform({point: projectPoint}),
+            d3path = d3.geo.path().projection(transform);
+
+        d3.json('lines13.geojson', function (data) {
+
+             var feature = g.selectAll("path")
+                    .data(data.features)
+                    .enter().append("path")
+                            .attr("class", function (d) {
+                        if (d.properties.type == "Registered") {
+                            return d.properties.route + " " + true;
+                    } else {
+                        return d.properties.route + " " + false;
+                    }
+                    })
+                    .attr("style", "opacity:0");
+
+                map.on("viewreset", reset);
+                reset();
+
+                var path = svg.selectAll("path")
+                .transition()
+//                .delay(function(d, i) {return i*1000})
+                .delay(function(d) {return d.properties.time_delay * 1000 * 2.5})
+                .duration(function(d) {
+                    
+                    time = moment("2016-06-14 18:00");
+                    $('.readableTime').text(time.format('MMMM Do YYYY, h:mm a'));
+                    return d.properties.trip_length * 1000 * 2
+                })
+                .each("start", function() {
+                    d3.select(this)
+                    .attr("style", "opacity:0.4")
+                })
+                .attrTween("stroke-dasharray", tweenDash)
+                .each("end", function() {
+                    d3.select(this)
+                        .transition()
+//                        .delay(500)
+                        .duration(1000)
+                        .attr("style", "opacity:0.1");
+                });
+
+            
+                                  //Get path start point for placing marker
+                  function pathStartPoint(path) {
+                    var d = path.attr("d"),
+                    dsplitted = d.split("L")[0].slice(1);
+                    return dsplitted;
+                  }
+            
+//                    var startPoint = pathStartPoint(feature);
+            
+//            console.log(startPoint)
+            
+//            var groups = g.selectAll("g")
+//                .data(data.features)
+//                .enter()
+//                .append("g");
+////            
+//            groups.append("circle")
+            g.selectAll("circle")
+                .data(data.features)
+                .enter()
+                .append("circle")
+                .attr("r", 3)
+                .attr("transform", "translate(-100,-100)")
+//                .attr("id", "marker")
+//                .attr("transform", function(d,i) {return "translate(250," + (i * 100) + ")"})
+//                .attr("transform", "translate(" + startPoint + ")")
+                //start all circles off-screen
+                .transition()
+                .delay(function(d) {return d.properties.time_delay * 1000 * 2.5})
+                .duration(function(d) {
+                    return d.properties.trip_length * 1000 * 2
+                })
+//                .each("start", function(d) {
+//                
+//                    var startPoint = pathStartPoint(path);
+//                
+//                    d3.select(this)
+//                    .attr("transform", "translate(" + startPoint + ")")
+//                })
+//                .attr("r", 0)
+//              .delay(function(d,i){return i*4000;})
+                .attrTween("transform", createPathTween2)
+//            .attrTween("stroke-dasharray", tweenDash);
+                            .each("end", function() {
+                    d3.select(this)
+                        .transition()
+//                        .delay(500)
+                        .attr("r", 0);
+                });
+         
+                  function tweenDash() {  
+
+                    var l = this.getTotalLength();
+
+                    var i = d3.interpolateString("0," + l, l + "," + l); // interpolation of stroke-dasharray style attr
+                    return function(t) {
+                      var marker = d3.select("#marker");
+    //                    console.log(marker);
+                      var p = path.node().getPointAtLength(t * l);
+    //                    console.log(p);
+                      marker.attr("transform", "translate(" + p.x + "," + p.y + ")");//move marker
+                      return i(t);
+                        }
+                   }
+            
+//                  function createPathTween2(d, i, a) {  
+                      function createPathTween2(d, i) {  
+//                          console.log(d);
+//                          console.log(path);
+                      var path = this.parentNode.getElementsByTagName("path")[i];
+//                      console.log(this);
+                          console.log(i)
+                        console.log(this.parentNode.getElementsByTagName("path")[i]);
+                    var l = path.getTotalLength();
+
+                    var i = d3.interpolateString("0," + l, l + "," + l); // interpolation of stroke-dasharray style attr
+                    return function(t) {
+                      var marker = d3.select("#marker");
+    //                    console.log(marker);
+                      var p = path.getPointAtLength(t * l)
+    //                    console.log(p);
+                      return "translate(" + p.x + "," + p.y + ")";
+//                      marker.attr("transform", "translate(" + p.x + "," + p.y + ")");//move marker
+//                      return i(t);
+                        }
+                   }
+            
+                function createPathTween(d, i, a) {
+                    var path = this.parentNode.getElementsByTagName("path")[0];
+//                        console.log(path);
+//                    var l = path.getTotalLength();
+                    var l = path.getTotalLength();
+                    //    console.log(l);
+                    return function(t) {
+                        var p = path.getPointAtLength(t * l);
+                        return "translate(" + p.x + "," + p.y + ")";
+                    };
+                }
+
+                // Reposition the SVG to cover the features.
+                function reset() {
+                    var bounds = d3path.bounds(data),
+                        topLeft = bounds[0],
+                        bottomRight = bounds[1];
+                    svg.attr("width", bottomRight[0] - topLeft[0])
+                        .attr("height", bottomRight[1] - topLeft[1])
+                        .style("left", topLeft[0] + "px")
+                        .style("top", topLeft[1] + "px");
+                    g.attr("transform", "translate(" + -topLeft[0] + "," + -topLeft[1] + ")");
+                    feature.attr("d", d3path);
+                }
+        });
+        // Use Leaflet to implement a D3 geometric transformation.
+        function projectPoint(x, y) {
+            var point = map.latLngToLayerPoint(new L.LatLng(y, x));
+            this.stream.point(point.x, point.y);
+        }
+        
+//        var timeNow = moment().format('MMMM Do YYYY, h:mm:ss a');
+//        document.getElementById('startTime').innerHTML = timeNow;
+        
+//        http://www.webdeveloper.com/forum/showthread.php?3153-How-much-time-has-elapsed-Since-loading-this-web-page
+        
+//        window.onload = function what(){
+//            document.getElementById('startTime').innerHTML = yourTextVariable;
+//        };
+        
+    </script>
+
+    </body>
+</html>
