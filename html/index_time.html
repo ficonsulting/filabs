@@ -44,6 +44,22 @@
         margin:30px;
         padding:30px;
     }
+    
+    #timestamp{
+		position: absolute;
+		top: 110px;
+		left: 70px;
+		font-family: OstrichSans-Medium, Lato, Arial, Helvetica, sans-serif;
+		font-size: 35px;
+		padding: 10px;
+		background:  rgba(255, 255, 0255, 0.7);
+		width: 270px;
+		color: #333333;
+		text-align: center;
+		padding-right: 30px;
+/*		border: 2px solid #ddd;*/
+	}
+    
     .areaChart {
         position: absolute;
         bottom: 0;
@@ -71,9 +87,21 @@
         src: url("fonts/OstrichSans-Black.otf") format("opentype");
     }
     
-    .dateTimeBox {
+    @font-face {
+        font-family: OstrichSans-Medium;
+        src: url("fonts/OstrichSans-Medium.otf") format("opentype");
+    }
+    
+    .titleBox {
         position: absolute;
         top: 40px;
+        left: 70px;
+        width: 3000px;  
+    }
+    
+    .dateTimeBox {
+        position: absolute;
+        top: 110px;
         left: 70px;
         width: 3000px;  
     }
@@ -102,20 +130,28 @@
     
 </style>
     
-<body onload="startTime()">
+<body>
     
 
     <div id="map">
     </div>
     
+    <div class="titleBox">
+        <span class = "titleText">Capital Bikeshare</span>
+    </div>
+<!--
     <div class="dateTimeBox">
         <span class = "titleText">Capital Bikeshare</span>
     </div>
-    <div class="timeBox"> 
+-->
+    <div id = "timestamp"></div>
+<!--    <div class="timeBox"> -->
 <!--        <span id = "startTime"></span>-->
 <!--        <span class = "timeFactor"></span>-->
+<!--
         <span class = "readableTime"></span>
         <span class = "txt"></span>
+-->
     </div>
 
     <script src="js/moment.js"></script>
@@ -128,10 +164,6 @@
 
 
     <script>
-        
-//        var startTime = moment()
-        
-//        $('.startTime').html(5);
         
         var timeFactor = 5; //number of minutes in real life to a second in the viz
         $('.timeFactor').html(timeFactor); //Displays the timeFactor in the UI.
@@ -171,16 +203,9 @@
 
                 var path = svg.selectAll("path")
                 .transition()
-//                .delay(function(d, i) {return i*1000})
-                .delay(function(d) {return d.properties.time_delay * 900})
+                .delay(function(d) {return d.properties.time_delay * 700})
                 .duration(function(d) {
-                    
-//                    time = moment("2016-06-14 18:00");
-//                    $('.readableTime').text(time.format('MMMM Do YYYY, h:mm a'));
-//                    var today = new Date();
-//                    time = Math.round(new Date().getTime()/1000.0);
-//                    $('.readableTime').text(today.getSeconds());
-                    return d.properties.trip_length * 900
+                    return d.properties.trip_length * 700
                 })
                 .each("start", function() {
                     d3.select(this)
@@ -190,7 +215,6 @@
                 .each("end", function() {
                     d3.select(this)
                         .transition()
-//                        .delay(500)
                         .duration(1000)
                         .attr("style", "opacity:0.2");
                 });
@@ -202,31 +226,17 @@
                     dsplitted = d.split("L")[0].slice(1);
                     return dsplitted;
                   }
-            
-//                    var startPoint = pathStartPoint(feature);
-            
-//            console.log(startPoint)
-            
-//            var groups = g.selectAll("g")
-//                .data(data.features)
-//                .enter()
-//                .append("g");
-////            
-//            groups.append("circle")
             g.selectAll("circle")
                 .data(data.features)
                 .enter()
                 .append("circle")
                 .attr("r", 3)
                 .attr("transform", "translate(-100,-100)")
-//                .attr("id", "marker")
-//                .attr("transform", function(d,i) {return "translate(250," + (i * 100) + ")"})
-//                .attr("transform", "translate(" + startPoint + ")")
                 //start all circles off-screen
                 .transition()
-                .delay(function(d) {return d.properties.time_delay * 900})
+                .delay(function(d) {return d.properties.time_delay * 700})
                 .duration(function(d) {
-                    return d.properties.trip_length * 900
+                    return d.properties.trip_length * 700
                 })
                 .attrTween("transform", createPathTween2)
 //            .attrTween("stroke-dasharray", tweenDash);
@@ -242,7 +252,7 @@
                     var l = this.getTotalLength();
 
                     var i = d3.interpolateString("0," + l, l + "," + l); // interpolation of stroke-dasharray style attr
-                      console.log(l);
+//                      console.log(l);
                     return function(t) {
                       var marker = d3.select("#marker");
                       var p = path.node().getPointAtLength(t * l);
@@ -255,7 +265,7 @@
                         var path = this.parentNode.getElementsByTagName("path")[i];
                         var l = path.getTotalLength();
                         var i = d3.interpolateString("0," + l, l + "," + l); // interpolation of stroke-dasharray style attr
-                        console.log(l);
+//                        console.log(l);
                         return function(t) {
 //                            var marker = d3.select("#marker");
                             var p = path.getPointAtLength(t * l)
@@ -263,15 +273,6 @@
                         }
                    }
             
-//                    function createPathTween(d, i, a) {
-//                        var path = this.parentNode.getElementsByTagName("path")[0];
-//                        var l = path.getTotalLength();
-//                        return function(t) {
-//                            var p = path.getPointAtLength(t * l);
-//                            return "translate(" + p.x + "," + p.y + ")";
-//                    };
-//                }
-
                 // Reposition the SVG to cover the features.
                 function reset() {
                     var bounds = d3path.bounds(data),
@@ -291,30 +292,24 @@
             this.stream.point(point.x, point.y);
         }
         
-        function startTime() {
-    var today = new Date();
-    var h = today.getHours();
-    var m = today.getMinutes();
-    var s = today.getSeconds();
-    m = checkTime(m);
-    s = checkTime(s);
-    document.getElementById('txt').innerHTML =
-    h + ":" + m + ":" + s;
-    var t = setTimeout(startTime, 500);
-}
-function checkTime(i) {
-    if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
-    return i;
-}
+        var datetime = null,
+        date = null;
         
-//        var timeNow = moment().format('MMMM Do YYYY, h:mm:ss a');
-//        document.getElementById('startTime').innerHTML = timeNow;
+        date = moment(new Date("January 01, 2011 13:00:00"))
+
+        var update = function () {
+            <!-- date = moment(new Date()) -->
+            date = date.add(1, 'minutes')
+            datetime.html(date.format('MMMM Do, YYYY h:mm a'));
+        };
+
+        $(document).ready(function(){
+            datetime = $('#timestamp')
+            update();
+            setInterval(update, 700);
+        });
         
-//        http://www.webdeveloper.com/forum/showthread.php?3153-How-much-time-has-elapsed-Since-loading-this-web-page
-        
-//        window.onload = function what(){
-//            document.getElementById('startTime').innerHTML = yourTextVariable;
-//        };
+//        http://jsfiddle.net/029bxLma/16/
         
     </script>
 
