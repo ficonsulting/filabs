@@ -1,51 +1,32 @@
 ---
 layout:     post
 title:      "Capital Bikeshare"
-subtitle:   "Visualizing Washington, DC, bikeshare activity on its busiest day ever"
+subtitle:   "Visualizing Washington, DC, bikeshare activity"
 date:       2016-11-17 12:00:00
 author:     "David Leonard"
 header-img: "img/bike.jpg"
 ---
 
-[Capital Bikeshare Visualization](https://dal1234.github.io/)
+<p>Capital Bikeshare has provided almost 15 million bike rides across the greater Washington, DC, area over the six years it has been in existence.  That's a lot of happy commuters and tourists avoiding the gnarly DC traffic and the unpleasant bowels of the Washington Metro.</p>  
 
-<iframe src="{{ site.baseurl }}/html/index.html" 
+Where are all of these happy bicyclists pedaling?  We wanted to animate the entire six year history of Capital Bikeshare superimposed on a map of DC, and  then provide a time lapse over a couple brief minutes.  Unfortunately, readily available computing power constraints prohibited us from doing that, and readily available human brain power prohibited us from processing 15 million dots and lines racing across the computer screen anyway.  So instead we chose a shorter time period and provided all the bike rides for that period.  Perhaps one of those dots represents you and your borrowed big red bike.
+
+Here it is: [Capital Bikeshare Visualization](https://dal1234.github.io/)
+
+But you still might want to know more about the six year history of the program.  Here are a few nuggets of data mined from the 14 million rows of data generously made public by Capital Bikeshare.
+
+<h2 class="section-heading">Busiest stations</h2>
+
+Columbus Circle / Union Station is the busiest station in all of DC with 294,046 trips from this station.  This was followed by Massachusetts Ave & Dupont Circle NW and Lincoln Memorial.
+
+On April 19, 2016, 362 trips originated from Columbus Circle.  Here are all of them animated.
+
+<iframe src="{{ site.baseurl }}/html/bikeshare_loop_busiest.html" 
 width="700" 
 height="400"
 scrolling="no"
 frameborder="0"></iframe>
 
-<p>Never in all their history have men been able truly to conceive of the world as one: a single sphere, a globe, having the qualities of a globe, a round earth in which all the directions eventually meet, in which there is no center because every point, or none, is center — an equal earth which all men occupy as equals. The airman's earth, if free men make it, will be truly round: a globe in practice, not in theory.</p>
+<h2 class="section-heading">Technical notes</h2>
 
-<p>Science cuts two ways, of course; its products can be used for both good and evil. But there's no turning back from science. The early warnings about technological dangers also come from science.</p>
-
-<p>What was most significant about the lunar voyage was not that man set foot on the Moon but that they set eye on the earth.</p>
-
-<p>A Chinese tale tells of some men sent to harm a young girl who, upon seeing her beauty, become her protectors rather than her violators. That's how I felt seeing the Earth for the first time. I could not help but love and cherish her.</p>
-
-<p>For those who have seen the Earth from space, and for the hundreds and perhaps thousands more who will, the experience most certainly changes your perspective. The things that we share in our world are far more valuable than those which divide us.</p>
-
-<h2 class="section-heading">The Final Frontier</h2>
-
-<p>There can be no thought of finishing for ‘aiming for the stars.’ Both figuratively and literally, it is a task to occupy the generations. And no matter how much progress one makes, there is always the thrill of just beginning.</p>
-
-<p>There can be no thought of finishing for ‘aiming for the stars.’ Both figuratively and literally, it is a task to occupy the generations. And no matter how much progress one makes, there is always the thrill of just beginning.</p>
-
-<blockquote>The dreams of yesterday are the hopes of today and the reality of tomorrow. Science has not yet mastered prophecy. We predict too much for the next year and yet far too little for the next ten.</blockquote>
-
-<p>Spaceflights cannot be stopped. This is not the work of any one man or even a group of men. It is a historical process which mankind is carrying out in accordance with the natural laws of human development.</p>
-
-<h2 class="section-heading">Reaching for the Stars</h2>
-
-<p>As we got further and further away, it [the Earth] diminished in size. Finally it shrank to the size of a marble, the most beautiful you can imagine. That beautiful, warm, living object looked so fragile, so delicate, that if you touched it with a finger it would crumble and fall apart. Seeing this has to change a man.</p>
-
-<a href="#">
-    <img src="{{ site.baseurl }}/img/post-sample-image.jpg" alt="Post Sample Image">
-</a>
-<span class="caption text-muted">To go places and do things that have never been done before – that’s what living is all about.</span>
-
-<p>Space, the final frontier. These are the voyages of the Starship Enterprise. Its five-year mission: to explore strange new worlds, to seek out new life and new civilizations, to boldly go where no man has gone before.</p>
-
-<p>As I stand out here in the wonders of the unknown at Hadley, I sort of realize there’s a fundamental truth to our nature, Man must explore, and this is exploration at its greatest.</p>
-
-<p>Placeholder text by <a href="http://spaceipsum.com/">Space Ipsum</a>. Photographs by <a href="https://www.flickr.com/photos/nasacommons/">NASA on The Commons</a>.</p>
+Data were obtained from a data set made public by Capital Bikeshare and processed using R.  Bike paths were determined using a Google Maps API.  Visualizations were created using the d3 JavaScript library.
