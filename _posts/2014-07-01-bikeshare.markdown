@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "Capital Bikeshare"
-subtitle:   "Visualizing Washington, DC, bikeshare activity"
+subtitle:   "Visualizing Washington DC biking activity"
 date:       2016-11-17 12:00:00
 author:     "David Leonard"
 header-img: "img/bike.jpg"
