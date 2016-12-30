@@ -1,12 +1,8 @@
 ---
-layout:     post
+layout:     external
 title:      "Federal Credit Data Platform"
 subtitle:   "A repository of all Federal Credit data obtained through FOIA requests."
 date:       2016-06-10 12:00:00
 author:     "Jessica Gibas, Scott Inouye, Mike Topper"
-header-img: "img/loan.jpg"
+external_url: http://ficdpanalysisdev.azurewebsites.net/
 ---
-
-[ficdpanalysisdev.azurewebsites.net](http://ficdpanalysisdev.azurewebsites.net/)
-
-<p>The Federal Credit Data Platform should be used to explore and cross compare Federal credit programs across a variety of metrics. The Platform offers data on both program performance and characteristics with the ability to compare across time, program, and agency. FI Consulting has strived to collect a robust sampling of data. Our database houses data at the loan-instrument level reaching as far back as data is available. The platform will be continually updated as we receive new data on additional programs and update the existing programs. We encourage users to investigate the data to gain a better sense of federal credit and the risk exposures it presents.</p>
