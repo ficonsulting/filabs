@@ -38,7 +38,7 @@ By viewing ridership by both season and rider type, we see that the growth in re
 
 Columbus Circle / Union Station is the busiest station in all of DC with 294,046 trips from this station.  This was followed by Massachusetts Ave & Dupont Circle NW and Lincoln Memorial.
 
-On April 19, 2016, 362 trips originated from Columbus Circle.  Here are all of them animated.
+On April 19, 2016, 362 trips originated from Columbus Circle.  Here are all of them animated (refresh your browser if the lines aren't moving).
 
 <iframe src="{{ site.baseurl }}/html/capital_bikeshare/bikeshare_loop_busiest.html" 
 width="700" 
