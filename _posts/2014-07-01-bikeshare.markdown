@@ -13,7 +13,7 @@ Where are all of these happy bicyclists pedaling? We wanted to animate the entir
 
 [Capital Bikeshare Visualization](/html/capital_bikeshare/index.html)
 
-Here are a additional items of interest gathered from the 15 million rows of data generously made public by Capital Bikeshare.
+Here are additional items of interest gathered from the 15 million rows of data generously made public by Capital Bikeshare.
 
 <h2 class="section-heading">Ridership over time</h2>
 
