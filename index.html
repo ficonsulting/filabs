@@ -17,7 +17,7 @@ description: "Research and Development Division of FI Consulting"
     <p class="post-meta">Posted by 
         {% assign authorCount = page.authors | size %}
             {% if authorCount == 0 %}
-                {{ site.name }}
+                {{ site.title }}
             {% elsif authorCount == 1 %}
                 {{ page.authors | first }}
             {% else %}
