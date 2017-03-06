@@ -1,5 +1,6 @@
 ---
 layout:     post
+tags:		[R, Google Maps API, Data Visualization, FI Consulting, FI Labs, Capitol Area Data Science]
 categories: [R, Google Maps API, Data Visualization, FI Consulting, FI Labs, Capitol Area Data Science]
 title:      "Capital Bikeshare"
 subtitle:   "Visualizing Washington DC biking activity"
