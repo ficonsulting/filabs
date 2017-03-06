@@ -4,7 +4,7 @@ categories: [R, Fraud Analysis, Benford's Law, Data Visualization, FI Consulting
 title:      "Benford's Law"
 subtitle:   "Using the first-digit law to detect fraud"
 date:       2016-12-12 12:00:00
-author:     ["Jon Hill", "Nick Heitzman"]
+authors:     ["Jon Hill", "Nick Heitzman"]
 header-img: "img/code.jpg"
 ---
 
