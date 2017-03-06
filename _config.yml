@@ -6,7 +6,7 @@ copyright_name: FI Consulting
 description: "Research and Development Division of FI Consulting"
 #baseurl: "/startbootstrap-clean-blog-jekyll"
 baseurl: ""
-url: "http://ficonsulting.github.io"
+url: "https://ficonsulting.github.io"
 twitter_username: SBootstrap
 github_username:  davidtmiller
 facebook_username:  StartBootstrap
