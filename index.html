@@ -14,8 +14,10 @@ description: "Research and Development Division of FI Consulting"
         </h3>
         {% endif %}
     </a>
-    <p class="post-meta">Posted by {% assign author = site.data.authors[page.authors] %}
-        {{ author.name }} on {{ post.date | date: "%B %-d, %Y" }}
+    <p class="post-meta">Posted by 
+        {% for author in site.data.authors %} 
+            {{ author.name }} on {{ post.date | date: "%B %-d, %Y" }}
+        {% endfor %}
     </p>
 </div>
 <hr>
