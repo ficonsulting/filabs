@@ -1,12 +1,18 @@
 ---
 layout:     post
-tags:		[R, Google Maps API, Data Visualization, FI Consulting, FI Labs, Capitol Area Data Science]
 categories: [R, Google Maps API, Data Visualization, FI Consulting, FI Labs, Capitol Area Data Science]
 title:      "Capital Bikeshare"
 subtitle:   "Visualizing Washington DC biking activity"
 date:       2016-11-17 12:00:00
 author:     "David Leonard"
 header-img: "img/bike.jpg"
+tags:
+-	R
+-	Google Maps API
+-	Data Visualization
+-	FI Consulting
+-	FI Labs
+-	Capitol Area Data Science
 ---
 
 <p>Capital Bikeshare has provided almost 15 million bike rides across the greater Washington, DC, area over the six years it has been in existence.  That's a lot of happy commuters and tourists avoiding the gnarly DC traffic and the depths of the Washington Metro.</p>  
