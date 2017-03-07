@@ -1,5 +1,6 @@
 ---
 layout:     external
+tags:		[Federal Credit, Data Visualization, FOIA, FI Consulting, FI Labs, Capitol Area Data Science]
 categories: [Federal Credit, Data Visualization, FOIA, FI Consulting, FI Labs, Capitol Area Data Science]
 title:      "Federal Credit Data Platform"
 subtitle:   "A repository of all Federal Credit data obtained through FOIA requests."
