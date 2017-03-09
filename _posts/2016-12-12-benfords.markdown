@@ -1,10 +1,10 @@
 ---
-layout:     post
+layout: post
 categories: [R, Fraud Analysis, Benford's Law, Data Visualization, FI Consulting, FI Labs, Capitol Area Data Science]
-tags:		[R, Fraud Analysis, Benford's Law, Data Visualization, FI Consulting, FI Labs, Capitol Area Data Science]
-title:      "Benford's Law"
-subtitle:   "Using the first-digit law to detect fraud"
-date:       2016-12-12 12:00:00
+tags: [R, Fraud Analysis, Benford's Law, Data Visualization, FI Consulting, FI Labs, Capitol Area Data Science]
+title: "Benford's Law"
+subtitle: "Using the first-digit law to detect fraud"
+date: 2016-12-12 12:00:00
 author: Jon Hill and Nick Heitzman
 header-img: "img/code.jpg"
 ---
