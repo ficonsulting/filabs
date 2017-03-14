@@ -4,7 +4,7 @@ description: "Research and Development Division of FI Consulting"
 ---
 
 {% for post in paginator.posts %}
-<div class="post-preview">
+<div class="post-preview col-lg-9">
     <a href="{{ post.url | prepend: site.baseurl }}">
         <h2 class="post-title">            {{ post.title }}
         </h2>
@@ -37,6 +37,6 @@ description: "Research and Development Division of FI Consulting"
 </ul>
 {% endif %}
 
-<div class="col-md-3">
+<div class="col-lg-3">
   {% include blogroll.html %}
 </div>
