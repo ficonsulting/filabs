@@ -401,3 +401,10 @@ img::-moz-selection {
 body {
   webkit-tap-highlight-color: #0085a1;
 }
+
+.sidebar-column {
+  float: right;
+  width: 300px;
+  margin-right: -1000px;
+  padding-top: 50px; /* extra space padding */
+}
