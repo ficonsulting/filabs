@@ -4,17 +4,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
  <channel>
-  <title>{{ site.title  | xml_escape }} - blog</title>
-  <description>Posts tagged as 'blog'</description>
-     <atom:link href="{{ site.url }}/feeds/feed.blog.xml" rel="self" type="application/rss+xml" />
-  <link>{{ site.url }}/tag/blog/</link>
+  <title type="html">{{ site.title  | xml_escape }}</title>
+  <description>Posts tagged with 'R'</description>
+     <atom:link href="{{ site.url }}/feeds/feed.R.xml" rel="self" type="application/rss+xml" />
+  <link>{{ site.url }}/tag/r/</link>
   <updated>{{ site.time | date_to_xmlschema }}</updated>
   <author>
    <name>{{ site.author.name }}</name>
    <email>{{ site.author.email }}</email>
   </author>
 
-  {% for post in site.tags.blog limit:10 %}
+  {% for post in site.tags.R limit:10 %}
    <item>
     <title>{{ post.title | xml_escape }}</title>
     <description>{{ post.content | xml_escape }}</description>
