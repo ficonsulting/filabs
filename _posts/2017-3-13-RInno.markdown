@@ -19,7 +19,7 @@ This is when [RInno][rinno] ("R Inno"):
 
 We initially developed this framework because we work with a lot of sensitive data, and deploying our shiny apps would require vetting third party hosts/software. However, the unknown benefit of building and *deploying* a shiny app usually could not compete with the known pains of the security review process. 
 
-Because R/RStudio have often been approved for desktop computers, RInno helps push back the need for a software/cloud host security assessment by allowing us to deploy local shiny apps using approved, local copies of R. After organizations start using locally deployed shiny apps, it is our hope that they will build demand for hosted solutions without requiring as much maintenance as a fully manual local deployment.
+Because R/RStudio often get approved before Shiny Server/RStudio Connect, RInno allows us to deploy local shiny apps in the interim. After organizations start using those locally deployed shiny apps, it is our hope that they will build demand for hosted solutions and help push Shiny Server/RStudio Connect up the priority list.
 
 Even as demand builds among Data Scientists and Analysts, many companies are very cautious about placing open source software on their servers. Especially, whimsically named software that invokes a response like this:
 
@@ -27,7 +27,7 @@ Even as demand builds among Data Scientists and Analysts, many companies are ver
 
 ![shiny-object-syndrome](/img/sos.jpeg){:class = "img-responsive"}
 
-If you have ever asked IT to install Shiny Server, they may have been affected by an unfortunate psychological phenomenon called an archoring bias. That is where RInno fits in. We'll let you know if it successfully builds demand for hosted solutions, but currently, it has just been an end in and of itself.
+If you have ever asked IT to install **Shiny** Server, they may have been affected by an unfortunate psychological phenomenon called an archoring bias. That is where RInno fits in.
 
 ## Getting Started
 {% highlight r %}
