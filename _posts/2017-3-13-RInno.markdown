@@ -46,7 +46,6 @@ After you build a shiny app, a minimal deployment can be created using the packa
 
 {% highlight r %}
 create_app(app_name = "myapp", app_dir = "path/to/myapp")
-
 compile_iss()
 {% endhighlight %}
 
