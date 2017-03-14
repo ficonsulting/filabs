@@ -11,6 +11,7 @@ twitter_username: SBootstrap
 github_username:  davidtmiller
 facebook_username:  StartBootstrap
 email_username:  contact@ficonsulting.com
+blogroll : true
 
 # Google Analytics
 # To enable google analytics, uncomment below line with a valid Google Tracking ID
