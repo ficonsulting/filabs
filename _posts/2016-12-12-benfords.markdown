@@ -1,6 +1,7 @@
 ---
 layout: post
 categories: [R, Benford's Law]
+tag: R
 title: "Benford's Law"
 subtitle: "Using the first-digit law to detect fraud"
 date: 2016-12-12 12:00:00
