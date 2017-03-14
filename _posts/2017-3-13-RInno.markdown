@@ -19,7 +19,7 @@ This is when [RInno][rinno] ("R Inno"):
 
 We initially developed this framework because we work with a lot of sensitive data, and deploying our shiny apps would require vetting third party hosts/software. However, the unknown benefit of building and *deploying* a shiny app usually could not compete with the known pains of the security review process. 
 
-Because R/RStudio have often been approved for desktop computers, RInno solves this problem by allowing us to deploy local shiny apps that can run on a local copy of R. After organizations start using locally deployed shiny apps, it is our hope that they will build demand for hosted solutions without requiring as much maintenance as a fully manual local deployment.
+Because R/RStudio have often been approved for desktop computers, RInno helps push back the need for a software/cloud host security assessment by allowing us to deploy local shiny apps using approved, local copies of R. After organizations start using locally deployed shiny apps, it is our hope that they will build demand for hosted solutions without requiring as much maintenance as a fully manual local deployment.
 
 Even as demand builds among Data Scientists and Analysts, many companies are very cautious about placing open source software on their servers. Especially, whimsically named software that invokes a response like this:
 
