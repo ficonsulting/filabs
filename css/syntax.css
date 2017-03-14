@@ -2,17 +2,17 @@
 /* from http://stackoverflow.com/a/23393920 */
 
 /* I'm not a fan of this style - Jon
-.highlight pre code * {
-  white-space: nowrap;    // this sets all children inside to nowrap
-}
-
-.highlight pre {
-  overflow-x: auto;       // this sets the scrolling in x
-}
-
-.highlight pre code {
-  white-space: pre;       // forces <code> to respect <pre> formatting
-}
+*.highlight pre code * {
+*  white-space: nowrap;    // this sets all children inside to nowrap
+*}
+*
+*.highlight pre {
+*  overflow-x: auto;       // this sets the scrolling in x
+*}
+*
+*.highlight pre code {
+*  white-space: pre;       // forces <code> to respect <pre> formatting
+*}
 */
 
 /*
