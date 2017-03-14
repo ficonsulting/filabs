@@ -49,7 +49,7 @@ create_app(app_name = "myapp", app_dir = "path/to/myapp")
 compile_iss()
 {% endhighlight %}
 
-You should customize the messaging on the first page of your installer by updating the text in *infobefore.txt*, and replace *default.ico* with an icon that helps people deduce what your app does before calling `compile_iss`.
+You should customize the messaging on the first page of your installer by updating the text in *infobefore.txt*, and replace *default.ico* with an icon that helps people deduce what your app does. Then call `compile_iss`.
 
 ## Basic Features
 By default, RInno does not include an installation of R, so if some of your users do not have R installed, or they are using different versions of R, you should change the default for `include_R`:
