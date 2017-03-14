@@ -1,6 +1,7 @@
 ---
 layout: post
-title:  "RInno: How to deploy local shiny apps"
+title:  "RInno"
+subtitle: "How to deploy local shiny apps"
 date:   2017-03-06 18:05:19 -0500
 author: Jon Hill
 categories: R
