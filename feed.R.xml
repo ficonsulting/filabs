@@ -17,7 +17,7 @@
   {% for post in site.tags.R limit:10 %}
    <entry>
     <title>{{ post.title | xml_escape }}</title>
-    <content type="html" xml:base={{ post.url }}>{{ post.content | xml_escape }}</content>
+    <content type="html">{{ post.content | xml_escape }}</content>
     <link>{{ site.url }}{{ post.url }} </link>
     <pubDate>{{ post.date | date_to_xmlschema }}</pubDate>
     <guid isPermaLink="true">{{ site.url }}{{ post.url }}</guid>
