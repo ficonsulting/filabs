@@ -45,7 +45,7 @@ Next, you can either use this link to install [Inno Setup][inno-download], or ru
 A minimal deployment can be created using the package defaults with two lines of code:
 
 {% highlight r %}
-create_app(app_name = "myapp", app_dir = "path/to/my/shinyapp")
+create_app(app_name = "myapp", app_dir = "path/to/myapp")
 
 compile_iss()
 {% endhighlight %}
