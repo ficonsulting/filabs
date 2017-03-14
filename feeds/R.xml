@@ -4,12 +4,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
  <channel>
+  <description>Posts tagged with R</description>
+  <link href="{{ site.url }}/feeds/R.xml" rel="self" type="application/atom+xml"/>
+  <link href="{{ site.url }}" rel="alternate" type="text/html"/>
+  <updated>{{ site.time | date_to_xmlschema }}</updated>
+  <id>{{ site.url }}</id>
   <title type="html">{{ site.title  | xml_escape }}</title>
   <subtitle>{{ site.subtitle | xml_escape }}</subtitle>
-  <description>Posts tagged with R</description>
-     <atom:link href="{{ site.url }}/feeds/feed.R.xml" rel="self" type="application/rss+xml" />
-  <link>{{ site.url }}/tag/r/</link>
-  <updated>{{ site.time | date_to_xmlschema }}</updated>
   
   {% for post in site.tags.R limit:10 %}
    <entry>
