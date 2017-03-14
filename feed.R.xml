@@ -15,13 +15,13 @@
   </author>
 
   {% for post in site.tags.R limit:10 %}
-   <item>
+   <entry>
     <title>{{ post.title | xml_escape }}</title>
-    <description>{{ post.content | xml_escape }}</description>
+    <content type="html" xml:base={{ post.url }}>{{ post.content | xml_escape }}</content>
     <link>{{ site.url }}{{ post.url }} </link>
     <pubDate>{{ post.date | date_to_xmlschema }}</pubDate>
     <guid isPermaLink="true">{{ site.url }}{{ post.url }}</guid>
-   </item>
+   </entry>
   {% endfor %}
  </channel>
 </rss>
