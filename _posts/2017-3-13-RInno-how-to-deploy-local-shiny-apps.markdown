@@ -1,0 +1,193 @@
+---
+layout: post
+title:  "RInno: How to deploy local shiny apps"
+date:   2017-03-06 18:05:19 -0500
+author: Jon Hill
+categories: R
+---
+RStudio has great resources on deploying shiny apps in the [shiny articles][shiny-articles] section of their website, especially the [local deployment][local-deployment] article. Ideally, one would use [shinyapps.io][shinyapps.io], Amazon Web Services, [Digital Ocean][do-referral], Microsoft Azure, or now [RStudio Connect][rstudio-connect] to host a shiny app, but clients/organizations often request that it be hosted on-premise *without installing any new software* (RStudio Connect). This is when [RInno][rinno] ("R Inno") is a great tool that:
+
+- Provides a better user experience than many other local deployment options
+- Does not share data/code with a third party or require server software
+- Requires no R programming skills nor a previous installation of R to install your app
+- Takes less work to setup
+- Can be extended to support continuous deployment from GitHub and/or BitBucket
+- Can be easily to uninstalled using Windows Control Panel
+
+We initially developed this framework because we work with a lot of sensitive data, and deploying our shiny apps would require vetting third party hosts/software. However, the unknown benefit of a shiny app usually could not compete with the known pains of a security review. RInno solves this problem by allowing us to deploy local shiny apps because R/RStudio have often been approved for desktop computers. After organizations start using shiny apps, it is our hope that those local apps will build demand for hosted solutions without requiring as much maintenance as a fully manual local deployment.
+
+Even as demand builds among Data Scientists and Analysts, many companies are very cautious about placing open source software on their servers. Especially, whimsically named software that invokes a response like this baby's:
+
+![scared-baby](/img/giphy.gif){:class = "img-responsive"}
+
+Shiny Server shares terminology with:
+
+![](/img/sos.jpeg){:class = "img-responsive"}
+
+If you have ever asked IT to install Shiny Server, they may have been affected by an unfortunate psychological phenomenon called an archoring bias. That is where RInno fits in. We'll let you know if it successfully builds demand for hosted solutions, but currently, it has just been an end in and of itself.
+
+## Getting Started
+{% highlight r %}
+install.packages("RInno")
+require(RInno)
+{% endhighlight %}
+
+If you would prefer to use the most recent version of RInno, bug fixes and all:
+{% highlight r %}
+devtools::install_github("ficonsulting/RInno",  build_vignettes = TRUE)
+{% endhighlight %}
+
+Next, you can either use this link to install [Inno Setup][inno-download], or run `RInno::install_inno()`.
+
+A minimal deployment can be created using the package defaults with two lines of code:
+
+{% highlight r %}
+create_app(app_name = "myapp", app_dir = "path/to/my/shinyapp")
+compile_iss()
+{% endhighlight %}
+
+You should customize the messaging on the first page of your installer by updating the text in *infobefore.txt* before calling `compile_iss`, and replace *default.ico* with an icon that helps people grasp what your app does.
+
+## Basic Features
+By default, RInno does not include an installation of R, so if some of your users do not have R installed, or they may be using different versions of R, you should change the default for `include_R`:
+
+{% highlight r %}
+create_app(app_name = "myapp", app_dir = "path/to/myapp", include_R = TRUE)
+{% endhighlight %}
+
+But keep in mind, this feature drastically increases the size of your installer, so only change `include_R = TRUE` if you really need it. We've added a short snippet of Pascal code to the installer to check each user's registry during installation.  If they have R installed, the installer will not re-install it. However, if another version is present, it will give them the version included in your installer. You can control which version of R is included and checked for by changing the `R_version` argument:
+
+{% highlight r %}
+create_app(
+	app_name  = "myapp", 
+	app_dir   = "path/to/myapp", 
+	include_R = TRUE, 
+	R_version = 3.2.9)
+{% endhighlight %}
+
+We've debated making this process less strict and just looking for any version of R on the user's computer. However, a strict strategy was easier to develop, and we think it is good to know exactly which version of R your app is running on, which would not be known using a more flexible strategy (i.e. the registry check finds a version of R, so don't install the version included with the app). This might be a feature people would like to control, so we are actively looking at ways to implement strict and flexible deployments. For now, RInno is strict about the version of R included with your installer.
+
+### Managing Dependencies
+In order to manage app software dependencies, provide them as a character vector to the `pkgs` argument:
+
+{% highlight r %}
+create_app(
+	app_name = "myapp", 
+	app_dir  = "path/to/myapp"
+	pkgs     = c("shiny", "dplyr", "plotly", "ggplot2", "xkcd"))
+{% endhighlight %}
+
+Your package dependencies will be listed in *packages.txt* and used by RInno to build a local library for your app on each user's computer. These will only be installed the first time that users open the app. Keep in mind that major package updates will not be triggered unless users re-install your app. This design choice prevents existing installations from breaking post-install, but there is still some risk that a major update happens pre-install.
+
+## Advanced Features
+For complex deployments, RInno provides support for many of Inno Setup's features. We'll highlight many of the most commonly used features here, but you should check out `create_app`'s support functions for more.
+
+{% highlight r %}
+?setup
+?icons
+{% endhighlight %}
+
+### Company Info
+If you provide a `publisher` and/or `pub_url`, your RInno installer will display that information on the "Support" dialog of the *Add/Remove Programs* Control Panel applet. Many standard programs provide this information, so it gives your shiny app a more official feel.
+
+{% highlight r %}
+create_app(
+	app_name  = "myapp",
+	app_dir   = "path/to/myapp",
+	publisher = "FI Consulting, Inc.",
+	pub_url   = "www.ficonsulting.com")
+{% endhighlight %}
+
+Additionally, you can provide two other types of URLs that will also be displayed in *Add/Remove Programs*, `upd_url` and `sup_url`.
+
+### Password Protection
+If `inst_pw` is supplied then the contents of the installer will be encrypted using a 160-bit key derived from the password string. This ensures that if unauthorized personnel try to gain access to the contents of your installer, it will take them a while to get in.
+
+{% highlight r %}
+create_app(
+	app_name = "myapp",
+	app_dir  = "path/to/myapp",
+	inst_pw  = "0r4nGE5")
+{% endhighlight %}
+
+### Licensing
+You can provide a .txt or .rtf file name with your license agreement to the `license_file` argument of `create_app`. The agreement will be displayed before the *Select Destination Page* of the installer and request that each user accept your terms before proceeding. 
+
+{% highlight r %}
+create_app(
+	app_name     = "myapp",
+	app_dir      = "path/to/myapp",
+	license_file = "LICENSE")
+{% endhighlight %}
+
+### Default Directory
+`default_dir` is where the installed shiny app will be saved on your users' computers. You should not hard code this value for the same reason that you should not `setwd("C:/Users/jhill/Documents")` at the top of any of your R scripts. That will work on your computer, but it is not portable. Luckily, Inno Setup provides support for 100s of [constants][inno-constants], which will return the correct string value for each user's environment.
+
+Here are some of our favorites:
+
+- "pf": The path of the system's Program Files directory
+- "win": The system's Windows directory, usually "C:/Windows"
+- "sd": The System Directory, typically "C:"
+- "userdocs": The path to My Documents
+- "userdesktop": The path to the user's desktop
+
+Inno Setup supports every version of Windows released since 2000, so these constants are very useful tools when you don't know what version of Windows your users have. `create_app` defaults to `default_dir = "userdocs"` because some IT controls prevent you from working out of Program Files.
+
+{% highlight r %}
+create_app(
+	app_name    = "myapp",
+	app_dir     = "path/to/myapp",
+	default_dir = "pf")
+{% endhighlight %}
+
+### Privileges
+Some IT departments like to press "next", "next", "next", and "finish" for you, so RInno supports that level of control. `create_app` defaults to `privilege = "lowest"`, which will allow your users to install your app on their own, but you can elevate the privilege level to "poweruser" and "admin". These will ask for elevated rights when someone tries to install your app.
+
+{% highlight r %}
+create_app(
+	app_name  = "myapp",
+	app_dir   = "path/to/myapp",
+	privilege = "admin")
+{% endhighlight %}
+
+### Icons
+To change your app's icon, ![](/img/default.png), you need to copy the new icon into `app_dir` and update the file name of `app_icon = "new_app_icon.ico"`. If you also don't like our taste in setup icons, ![](/img/save.png), feel free to download your own and add `setup_icon = "new_setup_icon.ico"`.
+
+{% highlight r %}
+create_app(
+	app_name   = "myapp",
+	app_dir    = "path/to/myapp",
+	app_icon   = "new_app_icon.ico",
+	setup_icon = "new_setup_icon.ico")
+{% endhighlight %}
+
+### Compression Options
+RInno supports 17 different compression methods including zip, bzip, lzma and lzma2. In general, higher levels of compression take longer and require more memory to compress/decompress. zip is fast and requires very little memory, but it does not compress as well as the other methods. bzip is somewhere in the middle, and lzma compresses the best but takes the longest and requires the most memory.
+
+{% highlight r %}
+create_app(
+	app_name    = "myapp",
+	app_dir     = "path/to/myapp",
+	compression = "bzip")
+{% endhighlight %}
+
+### Custom Messaging - Last Page
+*infoafter.txt* is copied into your `app_dir` by `copy_deployment` via `create_app`. If you would like to customize the message your users see at the end of your installer, add the name of a .txt or .rtf file to the `info_after` arg of `create_app` and edit the document accordingly.
+
+{% highlight r %}
+create_app(
+	app_name   = "myapp",
+	app_dir    = "path/to/myapp",
+	info_after = "infoafter.txt")
+{% endhighlight %}
+
+
+
+[shiny-articles]: http://shiny.rstudio.com/articles/
+[shinyapps.io]: www.shinyapps.io
+[do-referral]: https://m.do.co/c/e558dc96858e
+[rstudio-connect]: https://www.rstudio.com/products/connect/
+[rinno]: https://github.com/ficonsulting/RInno
+[local-deployment]: http://shiny.rstudio.com/articles/deployment-local.html
+[inno-download]: http://www.jrsoftware.org/isdl.php
+[inno-constants]: http://www.jrsoftware.org/ishelp/index.php?topic=consts
