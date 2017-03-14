@@ -153,7 +153,9 @@ create_app(
 {% endhighlight %}
 
 ### Icons
-<p>To change your app's icon, <img src="../img/default.png" />, you need to copy the new icon into `app_dir` and update the file name of `app_icon = "new_app_icon.ico"`. If you also don't like our taste in setup icons, <img src = "../img/save.png" />, feel free to download your own and add `setup_icon = "new_setup_icon.ico"`.</p>
+To change your app's icon: ![](/img/default.png)
+You need to copy the new icon into `app_dir` and update the file name of `app_icon = "new_app_icon.ico"`. If you also don't like our taste in setup icons: ![](/img/save.png)
+Feel free to download your own and add `setup_icon = "new_setup_icon.ico"`.
 
 {% highlight r %}
 create_app(
