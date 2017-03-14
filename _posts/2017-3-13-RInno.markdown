@@ -6,7 +6,7 @@ date:   2017-03-06 18:05:19 -0500
 author: Jon Hill
 categories: R
 ---
-RStudio has great resources on deploying shiny apps in the [shiny articles][shiny-articles] section of their website, especially the [local deployment][local-deployment] article. Ideally, one would use [shinyapps.io][shinyapps.io], Amazon Web Services, [Digital Ocean][do-referral], Microsoft Azure, or now [RStudio Connect][rstudio-connect] to host a shiny app, but clients/organizations often request that it be hosted on-premise *without installing any new software* (RStudio Connect). This is when [RInno][rinno] ("R Inno") is a great tool that:
+RStudio has great resources on deploying shiny apps in the [shiny articles][shiny-articles] section of their website, especially the [local deployment][local-deployment] article. Ideally, you could use [shinyapps.io][shinyapps.io], Amazon Web Services, [Digital Ocean][do-referral], Microsoft Azure, or now [RStudio Connect][rstudio-connect] to deploy your app, but clients/organizations often request that it be hosted on-premise *without installing any new software* (RStudio Connect). This is when [RInno][rinno] ("R Inno"):
 
 - Provides a better user experience than many other local deployment options
 - Does not share data/code with a third party or require server software
