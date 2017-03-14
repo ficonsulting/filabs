@@ -6,7 +6,7 @@ date:   2017-03-06 18:05:19 -0500
 author: Jon Hill
 categories: R
 ---
-RStudio has great resources on deploying shiny apps in the [shiny articles][shiny-articles] section of their website, especially the [local deployment][local-deployment] article. Ideally, you could use [shinyapps.io][shinyapps.io], Amazon Web Services, [Digital Ocean][do-referral], Microsoft Azure, or now [RStudio Connect][rstudio-connect] to deploy your app, but clients/organizations often request that it be hosted on-premise *without installing any new software* (RStudio Connect). This is when [RInno][rinno] ("R Inno"):
+RStudio has great resources on deploying shiny apps in the [shiny articles][shiny-articles] section of their website, especially the [local deployment][local-deployment] article. Ideally, you could use [shinyapps.io][shinyapps.io], Amazon Web Services, [Digital Ocean][do-referral], Microsoft Azure, or now [RStudio Connect][rstudio-connect] to deploy your app, but clients/organizations often request that it be hosted on-premise *without installing any new software* (RStudio Connect/Shiny Server). This is when [RInno][rinno] ("R Inno"):
 
 - Provides a better user experience than many other local deployment options
 - Does not share data/code with a third party or require server software
@@ -17,13 +17,11 @@ RStudio has great resources on deploying shiny apps in the [shiny articles][shin
 
 We initially developed this framework because we work with a lot of sensitive data, and deploying our shiny apps would require vetting third party hosts/software. However, the unknown benefit of a shiny app usually could not compete with the known pains of a security review. RInno solves this problem by allowing us to deploy local shiny apps because R/RStudio have often been approved for desktop computers. After organizations start using shiny apps, it is our hope that those local apps will build demand for hosted solutions without requiring as much maintenance as a fully manual local deployment.
 
-Even as demand builds among Data Scientists and Analysts, many companies are very cautious about placing open source software on their servers. Especially, whimsically named software that invokes a response like this baby's:
+Even as demand builds among Data Scientists and Analysts, many companies are very cautious about placing open source software on their servers. Especially, whimsically named software that invokes a response like this:
 
 ![scared-baby](/img/giphy.gif){:class = "img-responsive"}
 
-Shiny Server shares terminology with:
-
-![](/img/sos.jpeg){:class = "img-responsive"}
+![shiny-object-syndrome](/img/sos.jpeg){:class = "img-responsive"}
 
 If you have ever asked IT to install Shiny Server, they may have been affected by an unfortunate psychological phenomenon called an archoring bias. That is where RInno fits in. We'll let you know if it successfully builds demand for hosted solutions, but currently, it has just been an end in and of itself.
 
