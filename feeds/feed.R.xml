@@ -5,19 +5,16 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
  <channel>
   <title type="html">{{ site.title  | xml_escape }}</title>
-  <description>Posts tagged with 'R'</description>
+  <subtitle>{{ site.subtitle | xml_escape }}</subtitle>
+  <description>Posts tagged with R</description>
      <atom:link href="{{ site.url }}/feeds/feed.R.xml" rel="self" type="application/rss+xml" />
   <link>{{ site.url }}/tag/r/</link>
   <updated>{{ site.time | date_to_xmlschema }}</updated>
-  <author>
-   <name>{{ site.author.name }}</name>
-   <email>{{ site.author.email }}</email>
-  </author>
-
+  
   {% for post in site.tags.R limit:10 %}
    <entry>
     <title>{{ post.title | xml_escape }}</title>
-    <content type="html">{{ post.content | xml_escape }}</content>
+    <content type="html" xml:base="{{ post.url }}">{{ post.content | xml_escape }}</content>
     <link>{{ site.url }}{{ post.url }} </link>
     <pubDate>{{ post.date | date_to_xmlschema }}</pubDate>
     <guid isPermaLink="true">{{ site.url }}{{ post.url }}</guid>
