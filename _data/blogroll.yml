@@ -1,4 +1,4 @@
 # blogroll
 list :
-    - text : r-bloggers
-      url : www.r-bloggers.com
+    text : r-bloggers
+    url : www.r-bloggers.com
