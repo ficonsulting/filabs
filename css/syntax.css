@@ -85,9 +85,9 @@
 .highlight .gc { color: #999; background-color: #EAF2F5; }
 
 div#sidebar {
-  position: fixed;
+  position: absolute;
     bottom: 0;
     right: 0;
     width: 300px;
-    border: none;
+    border: 0px;
 }
