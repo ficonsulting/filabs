@@ -86,8 +86,6 @@
 
 div#sidebar {
   position: absolute;
-    bottom: 0;
-    right: 0;
-    width: 300px;
-    border: 0px;
+  top: 30px; 
+  left: 800px; 
 }
