@@ -6,16 +6,17 @@ date:   2017-03-06 18:05:19 -0500
 author: Jon Hill
 tags: R
 ---
-RStudio publishes great articles about deploying shiny apps on their website; the [local deployment][local-deployment] article is one of my favorites. You will find instructions about how to use shinyapps.io, Amazon Web Services, [Digital Ocean][do-referral], Microsoft Azure, or now RStudio Connect to deploy your app, but clients/organizations often request that your shiny app be hosted on-premise *without installing any new software* (RStudio Connect/Shiny Server). 
+RStudio publishes great articles about deploying shiny apps on their website; the [local deployment][local-deployment] article is one of my favorites. You will find instructions about how to use shinyapps.io, Amazon Web Services, [Digital Ocean][do-referral], Microsoft Azure, or now RStudio Connect to deploy your app, but clients/organizations often request that your shiny app be hosted on-premise *without installing any new software* (RStudio Connect/Shiny Server). They also want the apps to be available to non-technical staff who may or may not have R installed. Each manual, r-specific step required to deploy your shiny app is a barrier to entry that we want to avoid.
 
 This is when [RInno][rinno] ("R Inno"):
 
-- Provides a better user experience than many other local deployment options
-- Does not share data/code with a third party or require server software
+- Provides a clean user experience similar to installing any other program
 - Requires no R programming skills nor a previous installation of R to install your app
-- Takes less work to setup
+- Does not share data/code with a third party or require server software
 - Can be extended to support continuous deployment from GitHub and/or BitBucket
-- Can be easily to uninstalled using Windows Control Panel
+- Can be easily uninstalled using Windows Control Panel
+- Low maintenance for R developers because most steps are fully automated
+- Many users don't even know R is being used
 
 We initially developed this framework because we work with a lot of sensitive data, and deploying our shiny apps would require vetting third party hosts/software. However, the unknown benefit of building and *deploying* a shiny app usually could not compete with the known pains of the security review process. 
 
