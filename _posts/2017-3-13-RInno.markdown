@@ -27,7 +27,7 @@ Even as demand builds among Data Scientists and Analysts, many companies are ver
 
 ![shiny-object-syndrome](/img/sos.jpeg){:class = "img-responsive"}
 
-If you have ever asked IT to install **Shiny** Server, they may have been affected by an unfortunate psychological phenomenon called an archoring bias. That is where RInno fits in.
+If you have ever asked IT to install **Shiny** Server, they may have been affected by an unfortunate psychological phenomenon called an anchoring bias. That is where RInno fits in.
 
 ## Getting Started
 {% highlight r %}
@@ -45,7 +45,8 @@ Next, you can either use this link to install [Inno Setup][inno-download], or ru
 After you build a shiny app, a minimal deployment can be created using the package defaults with two lines of code:
 
 {% highlight r %}
-create_app(app_name = "myapp", app_dir = "path/to/myapp")
+example_app(app_dir = "app")  # This function has a bug on CRAN, so make sure to install from github
+create_app(app_name = "myapp", app_dir = "app")
 compile_iss()
 {% endhighlight %}
 
