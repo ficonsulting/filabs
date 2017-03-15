@@ -9,7 +9,7 @@ header-img: "img/minnow.jpg"
 ---
 RStudio publishes great articles about deploying shiny apps on their website; the [local deployment][local-deployment] article is one of my favorites. You will find instructions about how to use shinyapps.io, Amazon Web Services, [Digital Ocean][do-referral], Microsoft Azure, or now RStudio Connect to deploy your app, but clients/organizations often request that your shiny app be hosted on-premise without installing any new software (RStudio Connect/Shiny Server). They also want apps to be available to non-technical staff who may or may not have R installed. Each manual, r-specific step is a barrier to entry that we want to avoid.
 
-[RInno][rinno] ("R Inno") solves this problem because it:
+[RInno][rinno] ("R Inno" rhymes with minnow pictured above) solves this problem because it:
 
 - Provides a clean user experience similar to installing any other program
 - Requires no R programming skills nor a previous installation of R to install your app, many users don't even know R is being used
