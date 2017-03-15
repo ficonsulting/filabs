@@ -45,7 +45,7 @@ Next, you can either use this link to install [Inno Setup][inno-download], or ru
 
 After you build a shiny app, 
 {% highlight r %}
-example_app(app_dir = "app")  # This function has a bug on CRAN, so make sure to install from github
+example_app(app_dir = "app")  # Make sure to install from github for this feature
 {% endhighlight %}
 
 a minimal deployment can be created using the package defaults with two lines of code:
