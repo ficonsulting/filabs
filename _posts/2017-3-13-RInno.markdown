@@ -42,10 +42,14 @@ devtools::install_github("ficonsulting/RInno",  build_vignettes = TRUE)
 
 Next, you can either use this link to install [Inno Setup][inno-download], or run `RInno::install_inno()`.
 
-After you build a shiny app, a minimal deployment can be created using the package defaults with two lines of code:
-
+After you build a shiny app, 
 {% highlight r %}
 example_app(app_dir = "app")  # This function has a bug on CRAN, so make sure to install from github
+{% endhighlight %}
+
+a minimal deployment can be created using the package defaults with two lines of code:
+
+{% highlight r %}
 create_app(app_name = "myapp", app_dir = "app")
 compile_iss()
 {% endhighlight %}
