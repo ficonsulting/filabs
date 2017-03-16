@@ -29,6 +29,8 @@ create_app(app_name = "myapp", app_dir = "app")
 compile_iss()
 {% endhighlight %}
 
+There should now be a directory called `app/RInno_installer` with an example app in it. Run through the wizard to get a feel for what RInno does.
+
 ## Background
 RStudio publishes great articles about deploying shiny apps on their website; the [local deployment][local-deployment] article is one of my favorites. You will find instructions about how to use many different cloud hosts to deploy your app, but clients/organizations often request that your shiny app be hosted on-premise without installing any new software (RStudio Connect/Shiny Server). They also want apps to be available to non-technical staff who may or may not have R installed. Each manual, r-specific step is a barrier to entry that we want to avoid.
 
