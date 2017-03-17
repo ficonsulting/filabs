@@ -12,7 +12,8 @@ layout: default
                     {% if page.subtitle %}
                     <h2 class="subheading">{{ page.subtitle }}</h2>
                     {% endif %}
-                    <span class="meta">Posted by {% if page.author %}{{ page.author }}{% else %}{{ site.title }}{% endif %} on {{ page.date | date: "%B %-d, %Y" }}</span>
+                    <span class="meta">Posted by {% if page.author %}{{ page.author }}{% else %}{{ site.title }}{% endif %} on {{ page.date | date: "%B %-d, %Y" }} {% if page.comments %} • <a href="{{ site.url }}{{ page.url }}#disqus_thread">0 Comments</a>{% endif %}
+					</span>
                 </div>
             </div>
         </div>
@@ -28,6 +29,7 @@ layout: default
 				{{ content }}
 
                 <hr>
+				{% include disqus.html %}
 
                 <ul class="pager">
                     {% if page.previous.url %}
@@ -41,10 +43,14 @@ layout: default
                     </li>
                     {% endif %}
                 </ul>
+				
 
             </div>
         </div>
     </div>
+	
 </article>
+
+
 
 <hr>
