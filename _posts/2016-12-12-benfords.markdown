@@ -6,6 +6,7 @@ date: 2016-12-12 12:00:00
 author: Jon Hill and Nick Heitzman
 header-img: "img/code.jpg"
 permalink: /:title
+comments: true
 ---
 
 <p>

@@ -7,6 +7,7 @@ date:       2016-11-17 12:00:00
 author:     "David Leonard"
 header-img: "img/bike.jpg"
 permalink: /:title
+comments: true
 ---
 
 <p>Capital Bikeshare has provided almost 15 million bike rides across the greater Washington, DC, area over the six years it has been in existence.  That's a lot of happy commuters and tourists avoiding the gnarly DC traffic and the depths of the Washington Metro.</p>  
