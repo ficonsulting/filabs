@@ -24,14 +24,15 @@ layout: default
 <article>
     <div class="container">
         <div class="row">
-			 
+			
+			{% if page.title != "Benford's Law" %}
 			<div class="col-lg-2 col-md-1"> <!-- Instead of having a column offset class, I added a column where we can put images -->
 				{% if page.title == 'RInno' %}
 				<br>
 				<img src="/img/RInno.png" class="img-responsive" width="100px" position="absolute">
 				{% endif %}
 			</div>
-			
+			{% endif %}
 			
             <div class="col-lg-8 col-md-10">
 
