@@ -2,6 +2,8 @@
 layout: page
 description: "Research and Development Division of FI Consulting"
 ---
+<!-- Find author count -->
+{% assign authorCount = page.authors | size %}
 
 <div class="col-lg-9">
     {% for post in paginator.posts %}
@@ -15,8 +17,38 @@ description: "Research and Development Division of FI Consulting"
             </h3>
             {% endif %}
         </a>
-        <p class="post-meta">Posted by 
-            {{ post.author }} on {{ post.date | date: "%B %-d, %Y" }}
+        <p class="post-meta">Posted by 							
+						{% if authorCount == 1 %}
+							{% assign author = site.data.authors[post.authors] %}
+							<a href="{{ author.web }}">{{ author.name }}</a>
+							
+						{% else if authorCount > 1 %}
+							{% for author in post.authors %}
+								{% if forloop.first %}
+									<a href="{{ site.data.authors[author].web }}">
+										{{ site.data.authors[author].name }}
+									</a>
+								{% elsif forloop.last %}
+									and 
+									<a href="{{ site.data.authors[author].web }}">
+										{{ site.data.authors[author].name }}
+									</a>
+								{% else %}
+									, 
+									<a href="{{ site.data.authors[author].web }}">
+										{{ site.data.authors[author].name }}
+									</a>
+								{% endif %}
+							{% endfor %}
+						
+						{% else %}
+							{{ site.title }}
+							
+						{% endif %} on {{ post.date | date: "%B %-d, %Y" }} 
+						
+						{% if post.comments %} 
+							• <span class="disqus-comment-count" data-disqus-url="{{ site.url }}{{ post.url }}#disqus_thread"></span>
+						{% endif %}
         </p>
     </div>
     <hr>
@@ -26,6 +58,9 @@ description: "Research and Development Division of FI Consulting"
 <div class="col-lg-3 hidden-print hidden-xs hidden-sm hidden-md" id="sidebar">
   {% include blogroll.html %}
 </div>
+
+<!-- Include Disqus comment count -->
+<script id="dsq-count-scr" src="//https-ficonsulting-github-io.disqus.com/count.js" async></script>
 
 <!-- Pager -->
 {% if paginator.total_pages > 1 %}

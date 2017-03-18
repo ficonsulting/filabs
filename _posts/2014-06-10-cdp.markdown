@@ -4,7 +4,10 @@ tags:	[Federal Credit, Data Visualization, FOIA, FI Consulting, FI Labs, Capitol
 title:      "Federal Credit Data Platform"
 subtitle:   "A repository of all Federal Credit data obtained through FOIA requests."
 date:       2016-06-10 12:00:00
-author:     Jessica Gibas Scott Inouye and Mike Topper
+authors:     
+  - jessica_gibas 
+  - scott_inouye
+  - mike_topper
 external_url: http://ficdpanalysisdev.azurewebsites.net/
 permalink: /:title
 ---

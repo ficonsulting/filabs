@@ -3,9 +3,30 @@ jon_hill:
   name: Jon Hill
   title: Senior Consultant
   email: hill@ficonsulting.com
+  web: https://www.linkedin.com/in/jonmarkhill/
   
 nick_heitzman:
   name: Nick Heitzman
   title: Managing Consultant, Data Science
   email: heitzman@ficonsulting.com
+  web: https://www.linkedin.com/in/nick-heitzman/
   
+david_leonard:
+  name: David Leonard
+  title: Managing Consultant
+  email: leonard@ficonsulting.com
+  web: https://www.linkedin.com/in/david-leonard-cfa-66b1b616/
+  
+jessica_gibas:
+  name: Jessica Gibas
+  web: https://www.linkedin.com/in/jessica-gibas-71268310/
+
+mike_topper:
+  name: Mike Topper
+  web: https://www.linkedin.com/in/mike-topper-9083b88/
+  
+scott_inouye:
+  name: Scott Inouye
+  title: Managing Consultant
+  email: inouye@ficonsulting.com
+  web: https://www.linkedin.com/in/scott-inouye-9654235/

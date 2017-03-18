@@ -4,7 +4,7 @@ tags: R
 title:      "Capital Bikeshare"
 subtitle:   "Visualizing Washington DC biking activity"
 date:       2016-11-17 12:00:00
-author:     "David Leonard"
+authors:    david_leonard
 header-img: "img/bike.jpg"
 permalink: /:title
 comments: true

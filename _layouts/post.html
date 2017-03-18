@@ -1,6 +1,8 @@
 ---
 layout: default
 ---
+<!-- Find author count -->
+{% assign authorCount = page.authors | size %}
 
 <!-- Post Header -->
 <header class="intro-header" style="background-image: url('{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}')">
@@ -12,7 +14,40 @@ layout: default
                     {% if page.subtitle %}
                     <h2 class="subheading">{{ page.subtitle }}</h2>
                     {% endif %}
-                    <span class="meta">Posted by {% if page.author %}{{ page.author }}{% else %}{{ site.title }}{% endif %} on {{ page.date | date: "%B %-d, %Y" }} {% if page.comments %} • <a href="{{ site.url }}{{ page.url }}#disqus_thread">0 Comments</a>{% endif %}
+
+                    <span class="meta">
+						Posted by 							
+						{% if authorCount == 1 %}
+							{% assign author = site.data.authors[page.authors] %}
+							<a href="{{ author.web }}">{{ author.name }}</a>
+							
+						{% else if authorCount > 1 %}
+							{% for author in page.authors %}
+								{% if forloop.first %}
+									<a href="{{ site.data.authors[author].web }}">
+										{{ site.data.authors[author].name }}
+									</a>
+								{% elsif forloop.last %}
+									and 
+									<a href="{{ site.data.authors[author].web }}">
+										{{ site.data.authors[author].name }}
+									</a>
+								{% else %}
+									, 
+									<a href="{{ site.data.authors[author].web }}">
+										{{ site.data.authors[author].name }}
+									</a>
+								{% endif %}
+							{% endfor %}
+						
+						{% else %}
+							{{ site.title }}
+							
+						{% endif %} on {{ page.date | date: "%B %-d, %Y" }} 
+						
+						{% if page.comments %} 
+							• <a href="{{ site.url }}{{ page.url }}#disqus_thread">Comments</a>
+						{% endif %}
 					</span>
                 </div>
             </div>
@@ -57,7 +92,9 @@ layout: default
             </div>
         </div>
     </div>
-	
+	<!-- Include Disqus comment count -->
+	<script id="dsq-count-scr" src="//https-ficonsulting-github-io.disqus.com/count.js" async></script>
+
 </article>
 
 
