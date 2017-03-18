@@ -6,4 +6,5 @@ subtitle:   "A repository of all Federal Credit data obtained through FOIA reque
 date:       2016-06-10 12:00:00
 author:     Jessica Gibas Scott Inouye and Mike Topper
 external_url: http://ficdpanalysisdev.azurewebsites.net/
+permalink: /:title
 ---
