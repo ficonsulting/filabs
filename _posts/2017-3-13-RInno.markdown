@@ -9,7 +9,7 @@ tags: R
 header-img: "img/rhino.jpg"
 permalink: /:title
 ---
-The name, RInno ("R Inno"), is a combination of R and Inno Setup. If it brings to mind a specific species of odd-toed ungulate, just remember, White and Black Rhinoceros are actually both gray and although RInno resembles "rhino," it actually rhymes with minnow.
+The name, RInno ("R Inno"), is a combination of R and Inno Setup. If it brings to mind a specific species of odd-toed ungulate, just remember, White and Black Rhinoceros are actually both gray, and although RInno resembles "rhino," it actually rhymes with minnow.
 
 ## Getting Started
 {% highlight r %}
