@@ -14,8 +14,7 @@ email_username:  contact@ficonsulting.com
 blogroll : true
 
 # Google Analytics
-# To enable google analytics, uncomment below line with a valid Google Tracking ID
-# google_tracking_id:
+google_tracking_id: UA-93971920-1
 
 # Build settings
 markdown: kramdown
