@@ -14,7 +14,6 @@ header-img: "img/authors.jpg"
 	{% else %} 
 		{{ author[1].name}}<br>
 	{% endif %}
-	{% if author[1].email.size > 0 %}{{ author[1].email }}<br>{% endif %}
 	<strong>Posts:</strong><br>
 	<ul>
 		{% for post in site.posts %}
