@@ -6,26 +6,35 @@ header-img: "img/authors.jpg"
 ---
 
 {% for author in site.data.authors %}
-  <div class="post-preview">
-    <img src="{{ author[1].pic | prepend: site.baseurl}}" style="width:128px;height:128px;border-radius:70px">
-	
-	{% if author[1].title.size > 0 %}
-		{{ author[1].name}} - {{ author[1].title }}<br> 
-	{% else %} 
-		{{ author[1].name}}<br>
+<!-- Row break point -->
+{% assign row_start = forloop.index | modulo:2 %}
+
+{% if row_start == 1 %} <div class="row"> {% endif %}
+	<div class="post-preview col-lg-5 col-lg-offset-1">
+		<img src="{{ author[1].pic | prepend: site.baseurl}}" style="width:128px;height:128px;border-radius:70px">
+		
+		{% if author[1].title.size > 0 %}
+			{{ author[1].name}} - {{ author[1].title }}<br> 
+		{% else %} 
+			{{ author[1].name}}<br>
+		{% endif %}
+		
+		<strong>Posts:</strong><br>
+		<ul>
+			{% for post in site.posts %}
+				{% if post.authors contains author[1].id %}
+				<li ><a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a></li>
+				{% endif %}
+			{% endfor %}
+		</ul>
+		{% if author[1].github.size > 0 %}
+			<a href="{{ author[1].github }}">GitHub <i class="fa fa-github" aria-hidden="true"></i></a> | 
+		{% endif %}
+		<a href="{{ author[1].linkedin }}">Linked <i class="fa fa-linkedin-square" aria-hidden="true"></i></a>
+	</div>
+	<!-- This makes sure the hr tags behave well in all sizes and don't duplicate the bottom one -->
+	{% if forloop.length != forloop.index %}<hr class="hidden-lg"> {% endif %}
+	{% if row_start != 1 %} </div> 
+		{% if forloop.length != forloop.index %}<hr class="hidden-md hidden-xs hidden-sm"> {% endif %}
 	{% endif %}
-	<strong>Posts:</strong><br>
-	<ul>
-		{% for post in site.posts %}
-			{% if post.authors contains author[1].id %}
-			<li ><a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }} - {{ post.subtitle }}</a></li>
-			{% endif %}
-		{% endfor %}
-	</ul>
-	{% if author[1].github.size > 0 %}
-		<a href="{{ author[1].github }}">GitHub <i class="fa fa-github" aria-hidden="true"></i></a> | 
-	{% endif %}
-	<a href="{{ author[1].linkedin }}">Linked <i class="fa fa-linkedin-square" aria-hidden="true"></i></a>
-  </div>
-  <hr>
 {% endfor %}
