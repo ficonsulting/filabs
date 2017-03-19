@@ -17,7 +17,7 @@ devtools::install_github("ficonsulting/RInno",  build_vignettes = TRUE)
 require(RInno)
 {% endhighlight %}
 
-Next, you can either use this link to install [Inno Setup][inno-download], or run `RInno::install_inno()`.
+Next, run `RInno::install_inno()` to install Inno Setup.
 
 After you build a shiny app, 
 {% highlight r %}

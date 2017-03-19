@@ -1,32 +1,47 @@
 # Author details.
-jon_hill:
-  name: Jon Hill
-  title: Senior Consultant
-  email: hill@ficonsulting.com
-  web: https://www.linkedin.com/in/jonmarkhill/
-  
-nick_heitzman:
-  name: Nick Heitzman
-  title: Managing Consultant, Data Science
-  email: heitzman@ficonsulting.com
-  web: https://www.linkedin.com/in/nick-heitzman/
-  
 david_leonard:
+  id: david_leonard
   name: David Leonard
   title: Managing Consultant
   email: leonard@ficonsulting.com
-  web: https://www.linkedin.com/in/david-leonard-cfa-66b1b616/
+  linkedin: https://www.linkedin.com/in/david-leonard-cfa-66b1b616/
+  github: https://github.com/dal1234
+  pic: /img/authors/david_leonard.jpg
+
+jon_hill:
+  id: jon_hill
+  name: Jon Hill
+  title: Senior Consultant
+  email: hill@ficonsulting.com
+  linkedin: https://www.linkedin.com/in/jonmarkhill/
+  github: https://github.com/Dripdrop12
+  pic: /img/authors/jon_hill.jpg
+  
+nick_heitzman:
+  id: nick_heitzman
+  name: Nick Heitzman
+  title: Managing Consultant, Data Science
+  email: heitzman@ficonsulting.com
+  linkedin: https://www.linkedin.com/in/nick-heitzman/
+  github: https://github.com/NickDoesData
+  pic: /img/authors/nick_heitzman.jpg
   
 jessica_gibas:
+  id: jessica_gibas
   name: Jessica Gibas
-  web: https://www.linkedin.com/in/jessica-gibas-71268310/
-
+  linkedin: https://www.linkedin.com/in/jessica-gibas-71268310/
+  pic: /img/authors/jessica_gibas.jpg
+  
 mike_topper:
+  id: mike_topper
   name: Mike Topper
-  web: https://www.linkedin.com/in/mike-topper-9083b88/
+  linkedin: https://www.linkedin.com/in/mike-topper-9083b88/
+  pic: /img/authors/mike_topper.jpg
   
 scott_inouye:
+  id: scott_inouye
   name: Scott Inouye
   title: Managing Consultant
   email: inouye@ficonsulting.com
-  web: https://www.linkedin.com/in/scott-inouye-9654235/
+  linkedin: https://www.linkedin.com/in/scott-inouye-9654235/
+  pic: /img/authors/scott_inouye.jpg

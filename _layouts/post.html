@@ -19,22 +19,22 @@ layout: default
 						Posted by 							
 						{% if authorCount == 1 %}
 							{% assign author = site.data.authors[page.authors] %}
-							<a href="{{ author.web }}">{{ author.name }}</a>
+							<a href="{{ author.linkedin }}">{{ author.name }}</a>
 							
 						{% else if authorCount > 1 %}
 							{% for author in page.authors %}
 								{% if forloop.first %}
-									<a href="{{ site.data.authors[author].web }}">
+									<a href="{{ site.data.authors[author].linkedin }}">
 										{{ site.data.authors[author].name }}
 									</a>
 								{% elsif forloop.last %}
 									and 
-									<a href="{{ site.data.authors[author].web }}">
+									<a href="{{ site.data.authors[author].linkedin }}">
 										{{ site.data.authors[author].name }}
 									</a>
 								{% else %}
 									, 
-									<a href="{{ site.data.authors[author].web }}">
+									<a href="{{ site.data.authors[author].linkedin }}">
 										{{ site.data.authors[author].name }}
 									</a>
 								{% endif %}

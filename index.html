@@ -9,33 +9,30 @@ description: "Research and Development Division of FI Consulting"
     {% for post in paginator.posts %}
     <div class="post-preview">
         <a href="{{ post.url | prepend: site.baseurl }}">
-            <h2 class="post-title">            {{ post.title }}
-            </h2>
+            <h2 class="post-title"> {{ post.title }} </h2>
             {% if post.subtitle %}
-            <h3 class="post-subtitle">
-                {{ post.subtitle }}
-            </h3>
+				<h3 class="post-subtitle"> {{ post.subtitle }} </h3>
             {% endif %}
         </a>
         <p class="post-meta">Posted by 							
 						{% if authorCount == 1 %}
 							{% assign author = site.data.authors[post.authors] %}
-							<a href="{{ author.web }}">{{ author.name }}</a>
+							<a href="{{ author.linkedin }}">{{ author.name }}</a>
 							
 						{% else if authorCount > 1 %}
 							{% for author in post.authors %}
 								{% if forloop.first %}
-									<a href="{{ site.data.authors[author].web }}">
+									<a href="{{ site.data.authors[author].linkedin }}">
 										{{ site.data.authors[author].name }}
 									</a>
 								{% elsif forloop.last %}
 									and 
-									<a href="{{ site.data.authors[author].web }}">
+									<a href="{{ site.data.authors[author].linkedin }}">
 										{{ site.data.authors[author].name }}
 									</a>
 								{% else %}
 									, 
-									<a href="{{ site.data.authors[author].web }}">
+									<a href="{{ site.data.authors[author].linkedin }}">
 										{{ site.data.authors[author].name }}
 									</a>
 								{% endif %}
