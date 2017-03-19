@@ -12,7 +12,7 @@ comments: true
 ---
 
 <p>
-<iframe src="http://162.243.127.129/shiny/benford/" width="1200px" height="700px"> </iframe>
+<!-- <iframe src="http://162.243.127.129/shiny/benford/" width="1200px" height="700px"> </iframe> -->
 <a href="http://162.243.127.129/shiny/benford/">Shiny App</a>
 </p>
 
