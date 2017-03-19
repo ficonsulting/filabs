@@ -47,7 +47,7 @@ description: "Research and Development Division of FI Consulting"
 						{% endif %} on {{ post.date | date: "%B %-d, %Y" }} 
 						
 						{% if post.comments %} 
-							• <span class="disqus-comment-count" data-disqus-url="{{ site.url }}{{ post.url }}#disqus_thread"></span>
+							• <a href="{{ site.url }}{{ post.url }}#disqus_thread"><span class="disqus-comment-count" data-disqus-url="{{ site.url }}{{ post.url }}#disqus_thread"></span></a>
 						{% endif %}
         </p>
     </div>
