@@ -1,6 +1,9 @@
 # blogroll
-list :
-    - text: r-bloggers
-      url: http://www.r-bloggers.com
-    - text: ficonsulting
-      url: http://www.ficonsulting.com/news-insights/blog/
+- text: FI Consulting
+  url: http://www.ficonsulting.com/news-insights/blog/
+- text: Dean Attali
+  url: http://deanattali.com
+- text: r-bloggers
+  url: http://www.r-bloggers.com
+- text: R Views
+  url: https://www.rstudio.com/rviews/
