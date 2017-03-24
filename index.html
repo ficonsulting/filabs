@@ -48,7 +48,7 @@ description: "Research and Development Division of FI Consulting"
 						{% endif %}
         </p>
     </div>
-    <hr>
+    {% if forloop.length != forloop.index %} <hr> {% endif %}
     {% endfor %}
 </div>
 
