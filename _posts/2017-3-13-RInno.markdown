@@ -2,7 +2,7 @@
 layout: post
 comments: true
 title:  "RInno"
-subtitle: "How to deploy local shiny apps"
+subtitle: "How to install local shiny apps"
 date:   2017-03-06 18:05:19 -0500
 authors: jon_hill
 tags: R
@@ -47,7 +47,7 @@ RStudio publishes great articles about deploying shiny apps on their website; th
 
 We initially developed this framework because we work with a lot of sensitive data, and deploying our shiny apps would require vetting third party hosts/software. However, the unknown benefit of building and *deploying* a shiny app usually cannot compete with the known pains of the security review process. 
 
-Because R often gets approved before Shiny Server, RInno allows us to install shiny apps on user's desktops in the interim. After organizations start using those locally installed shiny apps, it is our hope that they will build demand for hosted solutions and help push Shiny Server up the priority list. If you are familiar with Dr. Lee Pang's [DesktopDeployR][ddR] project, he built a very nice JScript procedure to manage local app start up sequences. RInno installs and controls that procedure using Inno Setup. This is useful because it removes a lot of manual work for you, the developer, and it also allows regular users to do it themselves. It also makes it much easier to change your mind about things because you specify arguments once in `create_app` and they will flow down through the framework without requiring in-depth editing and/or knowledge of his framework.
+Because R often gets approved before Shiny Server, RInno allows us to install shiny apps on user's desktops in the interim. After organizations start using those locally installed shiny apps, it is our hope that they will build demand for hosted solutions and help push Shiny Server up the priority list. If you are familiar with Dr. Lee Pang's [DesktopDeployR][ddR] project, he built a very nice JScript procedure to manage local app start up sequences. RInno installs and controls that procedure using Inno Setup. This is useful because it removes a lot of manual work for you, the developer, and it also allows regular users to do it themselves. If you change your mind using DesktopDeployR, you will have to know exactly how those changes need to be implemented. However, using RInno, you specify arguments once in `create_app` and they will flow through the framework without requiring in-depth editing and/or knowledge. RInno produces a higher quality result with a more agile design, but it would not exist without Dr. Lee Pang's foundational work.
 
 Even as demand builds among Data Scientists and Analysts, many companies are very cautious about placing open source software on their servers. Especially, whimsically named software that invokes a response like this:
 
