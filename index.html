@@ -44,7 +44,7 @@ description: "Research and Development Division of FI Consulting"
 						{% endif %} on {{ post.date | date: "%B %-d, %Y" }} 
 						
 						{% if post.comments %} 
-							• <a href="{{ post.url | prepend: site.baseurl }}#disqus_thread"></a>
+							• <a href="{{ post.url | prepend: site.baseurl }}#disqus_thread" data-disqus-identifier="{{ post.id }}">Comments</a>
 						{% endif %}
         </p>
     </div>
