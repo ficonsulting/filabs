@@ -9,22 +9,21 @@ tags: R
 header-img: "img/rhino.jpg"
 permalink: /:title
 ---
-The name, RInno ("R Inno"), is a combination of R and Inno Setup. If it brings to mind a specific species of odd-toed ungulate, just remember, White and Black Rhinoceros are actually both gray, and although RInno resembles "rhino," it actually rhymes with minnow.
+The name, RInno ("R Inno"), is a combination of R and Inno Setup, an installer of Windows programs (sorry Mac and Linux users). If the name brings to mind a specific species of odd-toed ungulate, just remember, White and Black Rhinoceros are actually both gray, and although RInno resembles "rhino," it actually rhymes with minnow.
 
 ## Getting Started
 {% highlight r %}
 devtools::install_github("ficonsulting/RInno",  build_vignettes = TRUE)
 require(RInno)
+RInno::install_inno() # Install Inno Setup
 {% endhighlight %}
-
-Next, run `RInno::install_inno()` to install Inno Setup.
 
 After you build a shiny app, 
 {% highlight r %}
 example_app(app_dir = "app") 
 {% endhighlight %}
 
-a minimal deployment can be created using the package defaults with two lines of code:
+a minimal installation can be created using the package defaults with two lines of code:
 
 {% highlight r %}
 create_app(app_name = "myapp", app_dir = "app")
@@ -41,14 +40,14 @@ RStudio publishes great articles about deploying shiny apps on their website; th
 - Provides a clean user experience similar to installing any other program
 - Requires no R programming skills nor a previous installation of R to install your app, many users don't even know R is being used
 - Does not share data/code with a third party or require server software
-- Can be extended to support continuous deployment from GitHub and/or BitBucket
+- Can be extended to support continuous installation from GitHub and/or BitBucket
 - Can be easily uninstalled using the Windows Control Panel
 - Is low maintenance for R developers because most steps are fully automated
 - Logs start up errors so that you can follow up with specific user's needs
 
-We initially developed this framework because we work with a lot of sensitive data, and deploying our shiny apps would require vetting third party hosts/software. However, the unknown benefit of building and *deploying* a shiny app usually could not compete with the known pains of the security review process. 
+We initially developed this framework because we work with a lot of sensitive data, and deploying our shiny apps would require vetting third party hosts/software. However, the unknown benefit of building and *deploying* a shiny app usually cannot compete with the known pains of the security review process. 
 
-Because R/RStudio often get approved before Shiny Server/RStudio Connect, RInno allows us to deploy local shiny apps in the interim. After organizations start using those locally deployed shiny apps, it is our hope that they will build demand for hosted solutions and help push Shiny Server/RStudio Connect up the priority list.
+Because R often gets approved before Shiny Server, RInno allows us to install shiny apps on user's desktops in the interim. After organizations start using those locally installed shiny apps, it is our hope that they will build demand for hosted solutions and help push Shiny Server up the priority list. If you are familiar with Dr. Lee Pang's [DesktopDeployR][ddR] project, he built a very nice JScript procedure to manage local app start up sequences. RInno installs and controls that procedure using Inno Setup. This is useful because it removes a lot of manual work for you, the developer, and it also allows regular users to do it themselves. It also makes it much easier to change your mind about things because you specify arguments once in `create_app` and they will flow down through the framework without requiring in-depth editing and/or knowledge of his framework.
 
 Even as demand builds among Data Scientists and Analysts, many companies are very cautious about placing open source software on their servers. Especially, whimsically named software that invokes a response like this:
 
@@ -75,7 +74,7 @@ create_app(
 	R_version = 3.2.9)
 {% endhighlight %}
 
-We've debated making this process less strict and just looking for any version of R on the user's computer. However, a strict strategy was easier to develop, and we think it is good to know exactly which version of R your app is running on, which would not be known using a more flexible strategy (i.e. the registry check finds a version of R, so don't install the version included with the app). This might be a feature people would like to control, so we are actively looking at ways to implement strict and flexible deployments. For now, RInno is strict about the version of R included with your installer.
+We've debated making this process less strict and just looking for any version of R on the user's computer. However, a strict strategy was easier to develop, and we think it is good to know exactly which version of R your app is running on, which would not be known using a more flexible strategy (i.e. the registry check finds a version of R, so don't install the version included with the app). This might be a feature people would like to control, so we are actively looking at ways to implement strict and flexible installations. For now, RInno is strict about the version of R included with your installer.
 
 ### Managing Dependencies
 In order to manage app software dependencies, provide them as a character vector to the `pkgs` argument:
@@ -90,7 +89,7 @@ create_app(
 Your package dependencies will be listed in *packages.txt* and used by RInno to build a local library for your app on each user's computer. These will only be installed the first time that users open the app. Keep in mind that major package updates will not be triggered unless users re-install your app. This design choice prevents existing installations from breaking post-install, but there is still some risk that a major update happens pre-install.
 
 ## Advanced Features
-For complex deployments, RInno provides support for many of Inno Setup's features. We'll highlight many of the most commonly used features here, but you should check out `create_app`'s support functions for more.
+For complex installations, RInno provides support for many of Inno Setup's features. We'll highlight many of the most commonly used features here, but you should check out `create_app`'s support functions for more.
 
 {% highlight r %}
 ?setup
@@ -186,7 +185,7 @@ create_app(
 {% endhighlight %}
 
 ### Custom Messaging - Last Page
-*infoafter.txt* is copied into your `app_dir` by `copy_deployment` via `create_app`. If you would like to customize the message your users see at the end of your installer, add the name of a .txt or .rtf file to the `info_after` arg of `create_app` and edit the document accordingly.
+*infoafter.txt* is copied into your `app_dir` by `copy_installation` via `create_app`. If you would like to customize the message your users see at the end of your installer, add the name of a .txt or .rtf file to the `info_after` arg of `create_app` and edit the document accordingly.
 
 {% highlight r %}
 create_app(
@@ -199,4 +198,5 @@ create_app(
 [rinno]: https://github.com/ficonsulting/RInno
 [local-deployment]: http://shiny.rstudio.com/articles/deployment-local.html
 [inno-download]: http://www.jrsoftware.org/isdl.php
+[ddR]: https://github.com/wleepang/DesktopDeployR
 [inno-constants]: http://www.jrsoftware.org/ishelp/index.php?topic=consts
