@@ -9,7 +9,7 @@ tags: R
 header-img: "img/rhino.jpg"
 permalink: /:title
 ---
-The name, RInno ("R Inno"), is a combination of R and Inno Setup, an installer of Windows programs (sorry Mac and Linux users). If the name brings to mind a specific species of odd-toed ungulate, just remember, White and Black Rhinoceros are actually both gray, and although RInno resembles "rhino," it actually rhymes with minnow.
+The name, RInno ("R Inno"), is a combination of R and Inno Setup, an installer for Windows programs (sorry Mac and Linux users). If the name brings to mind a specific species of odd-toed ungulate, just remember, White and Black Rhinoceros are actually both gray, and although RInno resembles "rhino," it actually rhymes with minnow. It's an R package.
 
 ## Getting Started
 {% highlight r %}
@@ -30,12 +30,12 @@ create_app(app_name = "myapp", app_dir = "app")
 compile_iss()
 {% endhighlight %}
 
-There should now be a directory called `app/RInno_installer` with an example app in it. Run through the wizard to get a feel for what RInno does.
+Now, there should be a directory, `app/RInno_installer`, containing an example installer. Double-click it to see what RInno does.
 
 ## Background
-RStudio publishes great articles about deploying shiny apps on their website; the [local deployment][local-deployment] article is one of my favorites. You will find instructions about how to use many different cloud hosts to deploy your app, but clients/organizations often request that your shiny app be hosted on-premise without installing any new software (RStudio Connect/Shiny Server). They also want apps to be available to non-technical staff who may or may not have R installed. Each manual, r-specific step is a barrier to entry that we want to avoid.
+RStudio publishes great articles about deploying shiny apps on their website; the [local deployment][local-deployment] article is one of my favorites. You can find instructions about how to use many different cloud and on premise servers to deploy your app, but clients/organizations often request that it be an on-premise app without installing any new hosting software (RStudio Connect/Shiny Server). They also want apps to be available to non-technical staff who may or may not have R installed. Each manual, r-specific step is a barrier to entry. It is another impossible delivery, right? 
 
-[RInno][rinno] solves this problem because it:
+It **was**, but [RInno][rinno] can deliver because it:
 
 - Provides a clean user experience similar to installing any other program
 - Requires no R programming skills nor a previous installation of R to install your app, many users don't even know R is being used
@@ -45,9 +45,9 @@ RStudio publishes great articles about deploying shiny apps on their website; th
 - Is low maintenance for R developers because most steps are fully automated
 - Logs start up errors so that you can follow up with specific user's needs
 
-We initially developed this framework because we work with a lot of sensitive data, and deploying our shiny apps would require vetting third party hosts/software. However, the unknown benefit of building and *deploying* a shiny app usually cannot compete with the known pains of the security review process. 
+We initially developed this framework because we work with a lot of sensitive data, and deploying our shiny apps would require vetting third party hosts/software. However, the unknown benefit of building and *deploying* a shiny app usually cannot compete with the known pains of an organization's security review process. 
 
-Because R often gets approved before Shiny Server, RInno allows us to install shiny apps on user's desktops in the interim. After organizations start using those locally installed shiny apps, it is our hope that they will build demand for hosted solutions and help push Shiny Server up the priority list. If you are familiar with Dr. Lee Pang's [DesktopDeployR][ddR] project, he built a very nice JScript procedure to manage local app start up sequences. RInno installs and controls that procedure using Inno Setup. This is useful because it removes a lot of manual work for you, the developer, and it also allows regular users to do it themselves. If you change your mind using DesktopDeployR, you will have to know exactly how those changes need to be implemented. However, using RInno, you specify arguments once in `create_app` and they will flow through the framework without requiring in-depth editing and/or knowledge. RInno produces a higher quality result with a more agile design, but it would not exist without Dr. Lee Pang's foundational work.
+Because R often gets approved before Shiny Server, RInno allows us to install shiny apps on user's desktops in the interim. After organizations start using those locally installed shiny apps, it is our hope that they will build demand for hosted solutions and help push Shiny Server up the priority list. If you are familiar with Dr. Lee Pang's [DesktopDeployR][ddR] project, he built a very nice JScript procedure to manage local app start up sequences. RInno installs and controls that procedure using Inno Setup. This is useful because it removes a lot of manual work for you, the developer, and it also allows regular users to do it themselves. If you change your mind using DesktopDeployR, you will have to know exactly how those changes need to be implemented. However, using RInno, you specify arguments once in `create_app` and they will flow through the framework without requiring in-depth editing and/or knowledge. RInno produces a higher quality result with a more agile design, but it would not exist without DesktopDeployR. So, hats off to Dr. Pang!
 
 Even as demand builds among Data Scientists and Analysts, many companies are very cautious about placing open source software on their servers. Especially, whimsically named software that invokes a response like this:
 
@@ -55,7 +55,7 @@ Even as demand builds among Data Scientists and Analysts, many companies are ver
 
 ![shiny-object-syndrome](/img/sos.jpeg){:class = "img-responsive"}
 
-If you have ever asked IT to install **Shiny** Server, they may have been affected by an unfortunate psychological phenomenon called an anchoring bias. That is where RInno fits in.
+If you have ever asked IT to install **Shiny** Server, they may have been affected by an unfortunate psychological phenomenon called an anchoring bias. That is where RInno fits in. It avoids the shiny bias and replaces it with a Rhino image.
 
 ## Basic Features
 By default, RInno does not include an installation of R, so if some of your users do not have R installed, or they are using different versions of R, you should change the default for `include_R`:
