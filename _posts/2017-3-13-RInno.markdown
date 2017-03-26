@@ -9,7 +9,7 @@ tags: R
 header-img: "img/rhino.jpg"
 permalink: /:title
 ---
-The name, RInno ("R Inno"), is a combination of R and Inno Setup, an installer for Windows programs (sorry Mac and Linux users). If the name brings to mind a specific species of odd-toed ungulate, just remember, White and Black Rhinoceros are actually both gray, and although RInno resembles "rhino," it actually rhymes with minnow. It's an R package.
+The name, RInno ("R Inno"), is a combination of R and Inno Setup, an installer for Windows programs (sorry Mac and Linux users). If the name brings to mind a specific species of odd-toed ungulate, just remember, White and Black Rhinoceros are actually both gray, and although RInno resembles "rhino," it actually rhymes with minnow. It's our newest R package.
 
 ## Getting Started
 {% highlight r %}
@@ -35,7 +35,7 @@ Now, there should be a directory, `app/RInno_installer`, containing an example i
 ## Background
 RStudio publishes great articles about deploying shiny apps on their website; the [local deployment][local-deployment] article is one of my favorites. You can find instructions about how to use many different cloud and on premise servers to deploy your app, but clients/organizations often request that it be an on-premise app without installing any new hosting software (RStudio Connect/Shiny Server). They also want apps to be available to non-technical staff who may or may not have R installed. Each manual, r-specific step is a barrier to entry. It is another impossible delivery, right? 
 
-It **was**, but [RInno][rinno] can meet those requirements because it:
+It **was** until we created [RInno][rinno] because it:
 
 - Provides a clean user experience similar to installing any other program
 - Requires no R programming skills nor a previous installation of R to install your app, many users don't even know R is being used
@@ -45,7 +45,7 @@ It **was**, but [RInno][rinno] can meet those requirements because it:
 - Is low maintenance for R developers because most steps are fully automated
 - Logs start up errors so that you can follow up with specific user's needs
 
-We initially developed this framework because we work with a lot of sensitive data, and deploying our shiny apps would require vetting third party hosts/software. However, the unknown benefit of building and *deploying* a shiny app usually cannot compete with the known pains of an organization's security review process. 
+We work with a lot of sensitive data, and deploying our shiny apps would require vetting third party hosts/software. However, the unknown benefit of building and *deploying* a shiny app usually cannot compete with the known pains of an organization's security review process. 
 
 Because R often gets approved before Shiny Server, RInno allows us to install shiny apps on user's desktops in the interim. After organizations start using those locally installed shiny apps, it is our hope that they will build demand for hosted solutions and help push Shiny Server up the priority list. If you are familiar with Dr. Lee Pang's [DesktopDeployR][ddR] project, he built a very nice JScript procedure to manage local app start up sequences. RInno installs and controls that procedure using Inno Setup. This is useful because it removes a lot of manual work for you, the developer, and it also allows regular users to do it themselves. If you change your mind using DesktopDeployR, you will have to know exactly how those changes need to be implemented. However, using RInno, you specify arguments once in `create_app` and they will flow through the framework without requiring in-depth editing and/or knowledge. RInno produces a higher quality result with a more agile design, but it would not exist without DesktopDeployR. So, hats off to Dr. Pang!
 
@@ -87,7 +87,7 @@ create_app(
 	remotes  = c("talgalili/installr", "daattali/shinyjs"))
 {% endhighlight %}
 
-These are added to *config.cfg* and used by RInno to build a local library for your app on each user's computer. Dependencies will only be installed the first time users open the app. So keep in mind, major package updates will not be triggered unless users re-install your app. This design choice prevents existing installations from breaking post-install, but there is still some risk that a major update happens pre-install.
+These are added to *utils/config.cfg* and used by RInno to build a local library for your app on each user's computer. Dependencies will only be installed the first time users open the app. So keep in mind, major package updates will not be triggered unless users re-install your app. This design choice prevents existing installations from breaking post-install, but there is still some risk that a major update happens pre-install.
 
 ## Advanced Features
 For complex installations, RInno provides support for many of Inno Setup's features. We'll highlight many of the most commonly used features here, but you should check out `create_app`'s support functions for more.
