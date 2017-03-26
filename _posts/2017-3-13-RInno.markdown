@@ -35,7 +35,7 @@ Now, there should be a directory, `app/RInno_installer`, containing an example i
 ## Background
 RStudio publishes great articles about deploying shiny apps on their website; the [local deployment][local-deployment] article is one of my favorites. You can find instructions about how to use many different cloud and on premise servers to deploy your app, but clients/organizations often request that it be an on-premise app without installing any new hosting software (RStudio Connect/Shiny Server). They also want apps to be available to non-technical staff who may or may not have R installed. Each manual, r-specific step is a barrier to entry. It is another impossible delivery, right? 
 
-It **was**, but [RInno][rinno] can deliver because it:
+It **was**, but [RInno][rinno] can meet those requirements because it:
 
 - Provides a clean user experience similar to installing any other program
 - Requires no R programming skills nor a previous installation of R to install your app, many users don't even know R is being used
@@ -77,16 +77,17 @@ create_app(
 We've debated making this process less strict and just looking for any version of R on the user's computer. However, a strict strategy was easier to develop, and we think it is good to know exactly which version of R your app is running on, which would not be known using a more flexible strategy (i.e. the registry check finds a version of R, so don't install the version included with the app). This might be a feature people would like to control, so we are actively looking at ways to implement strict and flexible installations. For now, RInno is strict about the version of R included with your installer.
 
 ### Managing Dependencies
-In order to manage app software dependencies, provide them as a character vector to the `pkgs` argument:
+In order to manage dependencies found in CRAN-like repositories, provide them as a character vector to the `pkgs` argument, or if you have any GitHub dependencies, add them to the `remotes` argument:
 
 {% highlight r %}
 create_app(
 	app_name = "myapp", 
 	app_dir  = "path/to/myapp"
-	pkgs     = c("shiny", "dplyr", "plotly", "ggplot2", "xkcd"))
+	pkgs     = c("shiny", "dplyr", "plotly", "ggplot2", "xkcd"),
+	remotes  = c("talgalili/installr", "daattali/shinyjs"))
 {% endhighlight %}
 
-Your package dependencies will be listed in *packages.txt* and used by RInno to build a local library for your app on each user's computer. These will only be installed the first time that users open the app. Keep in mind that major package updates will not be triggered unless users re-install your app. This design choice prevents existing installations from breaking post-install, but there is still some risk that a major update happens pre-install.
+These are added to *config.cfg* and used by RInno to build a local library for your app on each user's computer. Dependencies will only be installed the first time users open the app. So keep in mind, major package updates will not be triggered unless users re-install your app. This design choice prevents existing installations from breaking post-install, but there is still some risk that a major update happens pre-install.
 
 ## Advanced Features
 For complex installations, RInno provides support for many of Inno Setup's features. We'll highlight many of the most commonly used features here, but you should check out `create_app`'s support functions for more.
