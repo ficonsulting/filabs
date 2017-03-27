@@ -13,24 +13,24 @@ The name, RInno ("R Inno"), is a combination of R and Inno Setup, an installer f
 
 ## Getting Started
 {% highlight r %}
-devtools::install_github("ficonsulting/RInno",  build_vignettes = TRUE)
+install.packages("RInno")
 require(RInno)
-RInno::install_inno() # Install Inno Setup
+RInno::install_inno()
 {% endhighlight %}
 
-After you build a shiny app, 
+We put a simple example Shiny app in the package:
 {% highlight r %}
 example_app(app_dir = "app") 
 {% endhighlight %}
 
-a minimal installation can be created using the package defaults with two lines of code:
+A minimal installation can be created using the package defaults with two lines of code:
 
 {% highlight r %}
 create_app(app_name = "myapp", app_dir = "app")
 compile_iss()
 {% endhighlight %}
 
-Now, there should be a directory, `app/RInno_installer`, containing an example installer. Double-click it to see what RInno does.
+Now, there should be a new directory, `app/RInno_installer`, in your working directory. Double-click the .exe to see how that example app can be installed on your computer.
 
 ## Background
 RStudio publishes great articles about deploying shiny apps on their website; the [local deployment][local-deployment] article is one of my favorites. You can find instructions about how to use many different cloud and on premise servers to deploy your app, but clients/organizations often request that it be an on-premise app without installing any new hosting software (RStudio Connect/Shiny Server). They also want apps to be available to non-technical staff who may or may not have R installed. Each manual, r-specific step is a barrier to entry. It is another impossible delivery, right? 
