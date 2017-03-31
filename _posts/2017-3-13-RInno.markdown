@@ -111,7 +111,9 @@ create_app(
 Additionally, you can provide two other types of URLs that will also be displayed in *Add/Remove Programs*, `upd_url` and `sup_url`.
 
 ### Password Protection
-If `inst_pw` is supplied then the contents of the installer will be encrypted using a 160-bit key derived from the password string. This ensures that if unauthorized personnel try to gain access to the contents of your installer, it will take them a while to get in.
+There are restrictions on exporting technology encrypted above 64-bit levels, so we could not include this feature automatically. However, you can add it by visiting the Inno Setup [downloads][inno-download] page, downloading the *ISCrypt.dll*, and placing it your Inno Setup directory.
+
+Afterwards, if `inst_pw` is supplied then the contents of the RInno installer will be encrypted using a 160-bit key derived from the password string. This ensures that if unauthorized personnel try to gain access to the contents of your installer, it will take them a while to get in.
 
 {% highlight r %}
 create_app(
