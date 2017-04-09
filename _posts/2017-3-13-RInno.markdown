@@ -9,7 +9,7 @@ tags: R
 header-img: "img/rhino.jpg"
 permalink: /:title
 ---
-The name, RInno ("R Inno"), is a combination of R and Inno Setup, an installer for Windows programs (sorry Mac and Linux users). If the name brings to mind a specific species of odd-toed ungulate, just remember, White and Black Rhinoceros are actually both gray, and although RInno resembles "rhino," it actually rhymes with minnow. It's our newest R package.
+The name, RInno ("R Inno"), is a combination of R and Inno Setup, an installer for Windows programs (sorry Mac and Linux users). If the name brings to mind a specific species of odd-toed ungulate, just remember, White and Black Rhinoceros are actually both gray, and although RInno resembles "rhino," it actually rhymes with minnow. Ce n'est pas un rhinocéros (This is not a Rhino); it's our newest R package.
 
 ## Getting Started
 {% highlight r %}
