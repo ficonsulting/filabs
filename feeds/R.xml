@@ -1,27 +1,56 @@
 ---
 ---
-
 <?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
- <channel>
-  <description>Posts tagged with R</description>
-  <link href="{{ site.url }}/feeds/R.xml" rel="self" type="application/atom+xml"/>
-  <link href="{{ site.url }}" rel="alternate" type="text/html"/>
-  <updated>{{ site.time | date_to_xmlschema }}</updated>
-  <id>{{ site.url }}</id>
-  <title type="html">{{ site.title  | xml_escape }}</title>
-  <subtitle>{{ site.subtitle | xml_escape }}</subtitle>
+<feed xmlns:atom="http://www.w3.org/2005/Atom">
+ <generator uri="https://jekyllrb.com/" version="3.4.3">Jekyll</generator>
+ <link href="{{ site.url }}/feeds/R.xml" rel="self" type="application/atom+xml"/>
+ <link href="{{ site.url }}" rel="alternate" type="text/html"/>
+ <updated>{{ site.time | date_to_xmlschema }}</updated>
+ <id>{{ site.url }}</id>
+ <title type="html">{{ site.title  | xml_escape }}</title>
+ <subtitle>Posts tagged with R</subtitle>
   
-  {% for post in site.tags.R limit:10 %}
-   <entry>
-    <title type="html">{{ post.title | xml_escape }}</title>
-    <subtitle type="html">{{ post.subtitle }}</subtitle>
-    <link href="{{ site.url }}{{ post.url }}" rel="alternate" type="text/html" title="{{ post.title }}"/>
-    <published>{{ post.date | date_to_xmlschema }}</published>
-    <id>{{ site.url }}{{ post.url }}</id>
-    <author>{{ post.author }}</author>
-    <content type="html" xml:base="{{ site.url }}{{ post.url }}">{{ post.content | xml_escape }}</content>
-   </entry>
-  {% endfor %}
- </channel>
-</rss>
+ {% for post in site.tags.R limit:10 %}
+ 
+  {% assign authorCount = post.authors | size %}
+
+  <entry>
+   <title type="html">{{ post.title | xml_escape }}</title>
+   <subtitle type="html">{{ post.subtitle }}</subtitle>
+   <link href="{{ site.url }}{{ post.url }}" rel="alternate" type="text/html" title="{{ post.title }}"/>
+   <published>{{ post.date | date_to_xmlschema }}</published>
+   <id>{{ site.url }}{{ post.url }}</id>
+   <author>
+	  {% if authorCount == 1 %}
+			{% assign author = site.data.authors[post.authors] %}
+			<a href="{{ author.linkedin }}">{{ author.name }}</a>
+			
+		{% else if authorCount > 1 %}
+			{% for author in post.authors %}
+				{% if forloop.first %}
+					<a href="{{ site.data.authors[author].linkedin }}">
+						{{ site.data.authors[author].name }}
+					</a>
+				{% elsif forloop.last %}
+					and 
+					<a href="{{ site.data.authors[author].linkedin }}">
+						{{ site.data.authors[author].name }}
+					</a>
+				{% else %}
+					, 
+					<a href="{{ site.data.authors[author].linkedin }}">
+						{{ site.data.authors[author].name }}
+					</a>
+				{% endif %}
+			{% endfor %}
+		
+		{% else %}
+			{{ site.title }}
+			
+		{% endif %}
+	 </author>
+   <content type="html" xml:base="{{ site.url }}{{ post.url }}">{{ post.content | xml_escape }}</content>
+  </entry>
+ {% endfor %}
+ 
+</feed>
