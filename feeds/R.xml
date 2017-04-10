@@ -4,7 +4,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
  <generator uri="https://jekyllrb.com/" version="3.4.3">Jekyll</generator>
  <link href="{{ site.url }}/feeds/R.xml" rel="self" type="application/atom+xml"/>
- <link href="{{ site.url }}" rel="alternate" type="text/html"/>
+ <link href="{{ site.url }}/" rel="alternate" type="text/html"/>
  <updated>{{ site.time | date_to_xmlschema }}</updated>
  <id>{{ site.url }}</id>
  <title type="html">{{ site.title  | xml_escape }}</title>
@@ -15,8 +15,7 @@
   {% assign authorCount = post.authors | size %}
 
   <entry>
-   <title type="html">{{ post.title | xml_escape }}</title>
-   <subtitle type="html">{{ post.subtitle }}</subtitle>
+   <title type="html">{{ post.title | xml_escape }}{% if post.subtitle %}: {{ post.subtitle }}{% endif %}</title>
    <link href="{{ site.url }}{{ post.url }}" rel="alternate" type="text/html" title="{{ post.title }}"/>
    <published>{{ post.date | date_to_xmlschema }}</published>
    <id>{{ site.url }}{{ post.url }}</id>
