@@ -7,7 +7,7 @@
  <link href="{{ site.url }}/" rel="alternate" type="text/html"/>
  <updated>{{ site.time | date_to_xmlschema }}</updated>
  <id>{{ site.url }}</id>
- <title type="html">{{ site.title  | xml_escape }}</title>
+ <title type="html">{{ site.title  | xml_escape }} - R Feed</title>
  <subtitle>Posts tagged with R</subtitle>
   
  {% for post in site.tags.R limit:10 %}
