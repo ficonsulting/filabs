@@ -1,7 +1,7 @@
 ---
 ---
 <?xml version="1.0" encoding="UTF-8"?>
-<feed xmlns:atom="http://www.w3.org/2005/Atom">
+<feed xmlns="http://www.w3.org/2005/Atom">
  <generator uri="https://jekyllrb.com/" version="3.4.3">Jekyll</generator>
  <link href="{{ site.url }}/feeds/R.xml" rel="self" type="application/atom+xml"/>
  <link href="{{ site.url }}" rel="alternate" type="text/html"/>
