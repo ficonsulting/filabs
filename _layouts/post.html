@@ -31,6 +31,7 @@ layout: default
 									and 
 									<a href="{{ site.data.authors[author].linkedin }}">
 										{{ site.data.authors[author].name }}
+										{{ site.data.authors[author].name }}
 									</a>
 								{% else %}
 									, 
@@ -46,7 +47,7 @@ layout: default
 						{% endif %} on {{ page.date | date: "%B %-d, %Y" }} 
 						
 						{% if page.comments %} 
-							• <a href="{{ page.url }}#disqus_thread" data-disqus-identifier="{{ page.id }}">Comments</a>
+							• <a href="{{ page.url | prepend: site.baseurl }}#disqus_thread" data-disqus-identifier="{{ page.id }}">Comments</a>
 						{% endif %}
 					</span>
                 </div>
@@ -63,7 +64,7 @@ layout: default
 			<div class="col-lg-2 col-md-1"> <!-- Instead of having a column offset class, I added a column where we can put images -->
 				{% if page.title == 'RInno' %}
 				<br>
-				<img src="/img/RInno.png" class="img-responsive" width="100px" position="absolute">
+				<img src="{{ site.baseurl }}/img/RInno.png" class="img-responsive" width="100px" position="absolute">
 				{% endif %}
 			</div>
 			
@@ -75,12 +76,12 @@ layout: default
                 <ul class="pager">
                     {% if page.previous.url %}
                     <li class="previous">
-                        <a href="{{ page.previous.url | prepend: site.baseurl | replace: '//', '/' }}" data-toggle="tooltip" data-placement="top" title="{{page.previous.title}}">&larr; Previous Post</a>
+                        <a href="{{ page.previous.url | prepend: site.baseurl }}" data-toggle="tooltip" data-placement="top" title="{{page.previous.title}}">&larr; Previous Post</a>
                     </li>
                     {% endif %}
                     {% if page.next.url %}
                     <li class="next">
-                        <a href="{{ page.next.url | prepend: site.baseurl | replace: '//', '/' }}" data-toggle="tooltip" data-placement="top" title="{{page.next.title}}">Next Post &rarr;</a>
+                        <a href="{{ page.next.url | prepend: site.baseurl }}" data-toggle="tooltip" data-placement="top" title="{{page.next.title}}">Next Post &rarr;</a>
                     </li>
                     {% endif %}
                 </ul>

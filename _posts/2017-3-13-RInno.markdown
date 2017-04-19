@@ -51,9 +51,9 @@ If you are familiar with Dr. Lee Pang's [DesktopDeployR][ddR] project, he built 
 
 Even as demand builds among Data Scientists and Analysts, many companies are very cautious about placing open source software on their servers. Especially, whimsically named software that invokes a response like this:
 
-![scared-baby](/img/giphy.gif){:class = "img-responsive"}
+![scared-baby]({{ site.baseurl}}/img/giphy.gif){:class = "img-responsive"}
 
-![shiny-object-syndrome](/img/sos.jpeg){:class = "img-responsive"}
+![shiny-object-syndrome]({{ site.baseurl}}/img/sos.jpeg){:class = "img-responsive"}
 
 If you have ever asked IT to install **Shiny** Server, they may have been affected by an unfortunate psychological phenomenon called an anchoring bias. That is where RInno fits in. It avoids the shiny bias and replaces it with a Rhino image.
 
