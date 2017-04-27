@@ -5,8 +5,8 @@ email: contact@ficonsulting.com
 copyright_name: FI Consulting
 description: "Research and Development Division of FI Consulting"
 #baseurl: "/startbootstrap-clean-blog-jekyll"
-baseurl: ""
-url: "https://ficonsulting.github.io"
+baseurl: "/filabs"
+url: "http://www.ficonsulting.com"
 twitter_username: SBootstrap
 github_username:  davidtmiller
 facebook_username:  StartBootstrap
