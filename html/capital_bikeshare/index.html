@@ -29,21 +29,63 @@
         stroke:#990099;
     }
     circle {
-        fill: #2467C8;
+        fill: #FE0000;
+/*        fill: #2467C8;*/
     }
+    circle.false {
+/*        fill: #FE0000;*/
+        fill: #990099;
+    }
+    #timebox {
+        position:absolute;
+        height:200px;
+        width:300px;
+        top:0;
+        left:0;
+        z-index:10;
+        background:#000;
+        color:white;
+        margin:30px;
+        padding:30px;
+    }
+    
     #timestamp{
 		position: absolute;
-		top: 110px;
+		top: 130px;
 		left: 70px;
 		font-family: OstrichSans-Medium, Lato, Arial, Helvetica, sans-serif;
-		font-size: 35px;
+		font-size: 45px;
 		padding: 10px;
 		background:  rgba(255, 255, 0255, 0.7);
-		width: 270px;
+		width: 330px;
 		color: #333333;
 		text-align: center;
 		padding-right: 30px;
+/*		border: 2px solid #ddd;*/
 	}
+    
+    .areaChart {
+        position: absolute;
+        bottom: 0;
+        background: #000;
+    }
+    .axis path,
+    .axis line {
+          fill: none;
+          stroke: #FFF;
+          shape-rendering: crispEdges;
+          stroke-width:1;
+    }
+    .axis text {
+      stroke:white;
+    }
+    .area {
+      fill: #3366FF;
+    }
+    .empty {
+        fill: #990099;
+    }
+    
     @font-face {
         font-family: OstrichSans-Black;
         src: url("fonts/OstrichSans-Black.otf") format("opentype");
@@ -61,9 +103,31 @@
         width: 3000px;  
     }
     
+    .dateTimeBox {
+        position: absolute;
+        top: 110px;
+        left: 70px;
+        width: 3000px;  
+    }
+    
+    .timeBox {
+        position: absolute;
+        top: 110px;
+        left: 70px;
+        width: 3000px;  
+    }
+    
+    .box {
+        background: rgba(255, 255, 0255, 0.8);
+        padding: 10px;
+        box-sizing: border-box;
+        border-radius: 6px;
+/*        display:none;*/
+    }
+    
     .titleText {
         font-family: OstrichSans-Black, Lato, Arial, Helvetica, sans-serif;
-        font-size: 3.1em;
+        font-size: 3.9em;
         color: #333333;
         background: rgba(255, 255, 255, 0.7);
     }
@@ -71,29 +135,51 @@
 </style>
     
 <body>
+    
 
-    <div id="map"></div>
-
+    <div id="map">
+    </div>
+    
     <div class="titleBox">
         <span class = "titleText">Capital Bikeshare</span>
     </div>
-
+<!--
+    <div class="dateTimeBox">
+        <span class = "titleText">Capital Bikeshare</span>
+    </div>
+-->
     <div id = "timestamp"></div>
+<!--    <div class="timeBox"> -->
+<!--        <span id = "startTime"></span>-->
+<!--        <span class = "timeFactor"></span>-->
+<!--
+        <span class = "readableTime"></span>
+        <span class = "txt"></span>
+-->
+    </div>
 
     <script src="js/moment.js"></script>
     <script src="js/jquery-3.1.1.min.js"></script>
-    <script src="https://d3js.org/d3.v3.min.js"></script>
-    <script src='https://api.tiles.mapbox.com/mapbox.js/v1.6.4/mapbox.js'></script>
-    <link href='https://api.tiles.mapbox.com/mapbox.js/v1.6.4/mapbox.css' rel='stylesheet' />
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+    
+
+    <script src='http://api.tiles.mapbox.com/mapbox.js/v1.6.4/mapbox.js'></script>
+    <link href='http://api.tiles.mapbox.com/mapbox.js/v1.6.4/mapbox.css' rel='stylesheet' />
+
 
     <script>
+        
+        var timeFactor = 200; // value of 1000 is real time
+        $('.timeFactor').html(timeFactor); //Displays the timeFactor in the UI.
+        
 
         var tiles = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png',{
-            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'
-        });
+      attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'
+    });
 
         var map = L.map('map')
             .addLayer(tiles)
+//            .setView([38.88869, -77.03237], 13);
             .setView([38.9, -77.06], 13);
 
         var svg = d3.select(map.getPanes().overlayPane).append("svg"),
@@ -104,26 +190,26 @@
 
         d3.json('new_years.geojson', function (data) {
 
-            var feature = g.selectAll("path")
-                .data(data.features)
-                .enter().append("path")
-                .attr("class", function (d) {
-                    if (d.properties.type == "Registered") {
-                        return d.properties.route + " " + true;
+             var feature = g.selectAll("path")
+                    .data(data.features)
+                    .enter().append("path")
+                            .attr("class", function (d) {
+                        if (d.properties.type == "Registered") {
+                            return d.properties.route + " " + true;
                     } else {
                         return d.properties.route + " " + false;
                     }
-                })
-                .attr("style", "opacity:0");
+                    })
+                    .attr("style", "opacity:0");
 
-            map.on("viewreset", reset);
-            reset();
+                map.on("viewreset", reset);
+                reset();
 
-            var path = svg.selectAll("path")
+                var path = svg.selectAll("path")
                 .transition()
-                .delay(function(d) {return d.properties.time_delay * 700})
+                .delay(function(d) {return d.properties.time_delay * timeFactor})
                 .duration(function(d) {
-                    return d.properties.trip_length * 700
+                    return d.properties.trip_length * timeFactor
                 })
                 .each("start", function() {
                     d3.select(this)
@@ -133,64 +219,86 @@
                 .each("end", function() {
                     d3.select(this)
                         .transition()
-                        .duration(1000)
-                        .attr("style", "opacity:0.2");
+                        .duration(3000)
+                        .attr("style", "opacity:0.05");
                 });
 
+            
+                                  //Get path start point for placing marker
+                  function pathStartPoint(path) {
+                    var d = path.attr("d"),
+                    dsplitted = d.split("L")[0].slice(1);
+                    return dsplitted;
+                  }
             g.selectAll("circle")
                 .data(data.features)
                 .enter()
                 .append("circle")
-                .attr("r", 3)
-                .attr("transform", "translate(-100,-100)")
-                .transition()
-                .delay(function(d) {return d.properties.time_delay * 700})
-                .duration(function(d) {
-                    return d.properties.trip_length * 700
+                .attr("class", function (d) {
+                        if (d.properties.type == "Registered") {
+                            return d.properties.route + " " + true;
+                    } else {
+                        return d.properties.route + " " + false;
+                    }
                 })
-                .attrTween("transform", createPathTween)
-                    .each("end", function() {
-                        d3.select(this)
+                .attr("r", 3.5)
+                .attr("style", "opacity:0.8")
+                .attr("transform", "translate(-100,-100)")
+                //start all circles off-screen
+                .transition()
+                .delay(function(d) {return d.properties.time_delay * timeFactor})
+                .duration(function(d) {
+                    return d.properties.trip_length * timeFactor
+                })
+                .attrTween("transform", createPathTween2)
+//            .attrTween("stroke-dasharray", tweenDash);
+                            .each("end", function() {
+                    d3.select(this)
                         .transition()
+//                        .delay(500)
                         .attr("r", 0);
-                    });
+                });
          
-            function tweenDash() {  
+                  function tweenDash() {  
 
-                var l = this.getTotalLength();
+                    var l = this.getTotalLength();
 
-                var i = d3.interpolateString("0," + l, l + "," + l);
-                return function(t) {
-                    var marker = d3.select("#marker");
-                    var p = path.node().getPointAtLength(t * l);
-                    marker.attr("transform", "translate(" + p.x + "," + p.y + ")");
-                    return i(t);
-                    }
-                }
+                    var i = d3.interpolateString("0," + l, l + "," + l); // interpolation of stroke-dasharray style attr
+//                      console.log(l);
+                    return function(t) {
+                      var marker = d3.select("#marker");
+                      var p = path.node().getPointAtLength(t * l);
+                      marker.attr("transform", "translate(" + p.x + "," + p.y + ")");//move marker
+                      return i(t);
+                        }
+                   }
              
-            function createPathTween(d, i) {  
-                var path = this.parentNode.getElementsByTagName("path")[i];
-                var l = path.getTotalLength();
-                var i = d3.interpolateString("0," + l, l + "," + l);
-                return function(t) {
-                    var p = path.getPointAtLength(t * l)
-                        return "translate(" + p.x + "," + p.y + ")";
-                    }
-                }
+                    function createPathTween2(d, i) {  
+                        var path = this.parentNode.getElementsByTagName("path")[i];
+                        var l = path.getTotalLength();
+                        var i = d3.interpolateString("0," + l, l + "," + l); // interpolation of stroke-dasharray style attr
+//                        console.log(l);
+                        return function(t) {
+//                            var marker = d3.select("#marker");
+                            var p = path.getPointAtLength(t * l)
+                            return "translate(" + p.x + "," + p.y + ")";
+                        }
+                   }
             
-            function reset() {
-                var bounds = d3path.bounds(data),
-                    topLeft = bounds[0],
-                    bottomRight = bounds[1];
-                svg.attr("width", bottomRight[0] - topLeft[0])
-                    .attr("height", bottomRight[1] - topLeft[1])
-                    .style("left", topLeft[0] + "px")
-                    .style("top", topLeft[1] + "px");
-                g.attr("transform", "translate(" + -topLeft[0] + "," + -topLeft[1] + ")");
-                feature.attr("d", d3path);
-            }
+                // Reposition the SVG to cover the features.
+                function reset() {
+                    var bounds = d3path.bounds(data),
+                        topLeft = bounds[0],
+                        bottomRight = bounds[1];
+                    svg.attr("width", bottomRight[0] - topLeft[0])
+                        .attr("height", bottomRight[1] - topLeft[1])
+                        .style("left", topLeft[0] + "px")
+                        .style("top", topLeft[1] + "px");
+                    g.attr("transform", "translate(" + -topLeft[0] + "," + -topLeft[1] + ")");
+                    feature.attr("d", d3path);
+                }
         });
-        
+        // Use Leaflet to implement a D3 geometric transformation.
         function projectPoint(x, y) {
             var point = map.latLngToLayerPoint(new L.LatLng(y, x));
             this.stream.point(point.x, point.y);
@@ -202,6 +310,7 @@
         date = moment(new Date("January 01, 2011 13:00:00"))
 
         var update = function () {
+            <!-- date = moment(new Date()) -->
             date = date.add(1, 'minutes')
             datetime.html(date.format('MMMM Do, YYYY h:mm a'));
         };
@@ -209,10 +318,12 @@
         $(document).ready(function(){
             datetime = $('#timestamp')
             update();
-            setInterval(update, 700);
+            setInterval(update, timeFactor);
         });
-            
+        
+//        http://jsfiddle.net/029bxLma/16/
+        
     </script>
 
-</body>
+    </body>
 </html>
