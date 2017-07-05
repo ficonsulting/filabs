@@ -9,9 +9,9 @@ header-img: "img/msofficegit.jpg"
 permalink: /:title
 ---
 
-This is a tutorial on how to configure Git to manage Microsoft Office files. It'll cover docx, xls, xlsm, xlsx, and pptx. We hope that it will give you a sense for how to customize Git to meet your needs, especially if you find it difficult to track what has changed in your Microsoft Office files.
+This is a tutorial on how to configure Git to manage Microsoft Office files. It'll cover docx, xls, xlsm, xlsx, and pptx. I hope that it will give you a sense for how to customize Git to meet your needs, especially if you find it difficult to track what has changed in your Microsoft Office files.
 
-Microsoft Office products are often frustrating for developers and data scientists to work with. They are messy zipped collections of xml that behave in strange ways, change your data, and pose a risk to the reproducibility of your work. If you have added ".zip" to the end of a Microsoft Office file, sorry. There is nothing useful in there. If you change one cell of a moderately complicated financial model, it will impact literally dozens of files under the hood, so tracking the xml in Git is not very informative. All we want to know is `Assumptions!A1 100 -> 105` and `Projections!A1 1500 -> 1575`.
+Microsoft Office products are often frustrating for developers and data scientists to work with. They are messy zipped collections of xml that behave in strange ways, change your data, and pose a risk to the reproducibility of your work. If you have added ".zip" to the end of a Microsoft Office file, sorry. There is nothing useful in there. If you change one cell of a moderately complicated financial model, it will impact literally dozens of files under the hood, so tracking the xml in Git is not very informative. All you want to know is `Assumptions!A1 100 -> 105` and `Projections!A1 1500 -> 1575`.
 
 This type of information is incredibly useful from an auditing, risk, and reproducibility standpoint. Unlike Sharepoint which tracks check-in and check-out activity, Git gives a complete history of line-by-line changes. You don't need to open every version of a file to determine how/when something changed. You can call `git diff` or query the Git log to answer many of your questions. Git also encourages a much more expressive account of how and why things have changed through commit messages. This ensures that your work is reproducible and auditable. Future you will be grateful. Plus, Git is fun. It saves you time (in the long run) and helps you manage risk, so you can relax a bit while you work with Microsoft Office files that change in unexpected ways.
 
@@ -23,17 +23,16 @@ The world of Git without Microsoft Office is a much simpler place. You can colla
 
 ![cake](https://avatars0.githubusercontent.com/u/262532?v=3&s=400)
 
-[na-ka-na](https://github.com/na-ka-na), A.K.A. Sanchay Harneja, is the author of [ExcelCompare](https://github.com/na-ka-na/ExcelCompare), a command-line tool for diffing Excel workbooks. If we tell Git to run it as a custom `diff` tool, Git will crack open the binary with ExcelCompare. This is much better than the default message:
+[na-ka-na](https://github.com/na-ka-na), A.K.A. Sanchay Harneja, is the author of [ExcelCompare](https://github.com/na-ka-na/ExcelCompare), a command-line tool for diffing Excel workbooks. If you tell Git to run it as a custom `diff` tool, Git will crack open the binary with ExcelCompare. This is much better than the default message:
 
 {% highlight git %}
 $ git diff
 $ Binary files a/Book1.xlsx and b/Book1.xlsx differ
 {% endhighlight %} 
-Not helpful.
 
 First, [download](https://github.com/na-ka-na/ExcelCompare/releases) ExcelCompare. Place it in a path **without** spaces. You can escape spaces from Git commands, but no spaces in the path will just make your life easier. I put it in the root directory of my Git repo.
 
-Next, update your .git/config and .gitattributes files to run a custom command on Excel files when running `git diff`. Git looks in .gitattributes for rules to apply its configuration, and we need to tell it to use the "excel" method on files with xls, xlsx and xlsm file extensions. Then in .git/config, we tell Git what the "excel" method is.
+Next, update your .git/config and .gitattributes files to run a custom command on Excel files when running `git diff`. Git looks in .gitattributes for rules to apply its configuration, and you need to tell it to use the "excel" method on files with xls, xlsx and xlsm file extensions. Then in .git/config, you tell Git what the "excel" method is.
 
 ### .gitattributes
 If you don't have a .gitattributes file in your repo's root directory, create one with your favorite text editor. I'm a fan of NotePad++. Add these file extensions.
@@ -60,10 +59,10 @@ $ DIFF   Cell at      Projections!A1 => '1500' v/s '1575'
 $ Excel files Book1.xlsx and C:\Users\jhill\AppData\Local\Temp\hckpya_Book1.xlsx differ
 {% endhighlight %}
 
-Awesome! If you want to know how a client's financial model has been impacted by an assumption change, just run `git diff` after saving it. This is incredibly useful when you have lots of tabs and you are not sure how they all relate, and many other excel comparison tools force you to manually save different versions of the same file which increases the risk that the wrong version gets used or changes get lost in the mix. Now, we can work on the same file and commit our changes. Fun, right? Wrong. ExcelCompare slows down my `git diff` calls, so I am not completely sold. If someone knows of a faster tool, please comment!
+Awesome! If you want to know how a client's financial model has been impacted by an assumption change, just run `git diff` after saving it. This is incredibly useful when you have lots of tabs and you are not sure how they all relate, and many other excel comparison tools force you to manually save different versions of the same file which increases the risk that the wrong version gets used or changes get lost in the mix. Now, you can work on the same file and commit your changes. Fun, right? Wrong. ExcelCompare slows down your `git diff` calls, so I am not completely sold. If someone knows of a faster tool, please comment!
 
 # Word to Markdown
-Pandoc is a great tool for moving between HTML, docx, pdf, LaTeX, etc. We will use it to convert .docx files into markdown because that is a simple format that Git can work with. The default `git diff` on docx will tell you that an entire line has changed but leave it to you to figure out which words differ. When tracking my writing/edits, I like to track changes at a more granular level. The markdown versions of docx will help you zero in on specific words and highlight them with a custom diff.
+Pandoc is a great tool for moving between HTML, docx, pdf, LaTeX, etc. You can use it to convert .docx files into markdown because that is a simple format that Git can work with. The default `git diff` on docx will tell you that an entire line has changed but leave it to you to figure out which words differ. When tracking your writing/edits, it would be nice to track changes at a more granular level. The markdown versions of docx will help you zero in on specific words and highlight them with a custom diff.
 
 ### .gitattributes
 Add the file extension to .gitattributes.
@@ -126,7 +125,7 @@ Now, tell git to use the Python script to convert your presentation into text.
     binary=true
 {% endhighlight %}
 
-This will give you a dictionary comparison of your Power Point presentation's text, and it works well with the alias `wdiff` we created earlier. Try out `git wdiff MyPres.pptx` to see what has been added or deleted from a presentation.
+This will give you a dictionary comparison of your Power Point presentation's text, and it works well with the alias `wdiff` you created earlier. Try out `git wdiff MyPres.pptx` to see what has been added or deleted from a presentation.
 
 # Conclusion
 Microsoft Office files will find their way into your repos. Now you can dig into your .gitattributes file and .git/config settings to track them appropriately. These instructions are at the repo level, but you can just as easily apply them to your global .gitconfig and make it the default for all projects. If you have questions or comments, please join the discussion below! 
