@@ -2,7 +2,7 @@
 layout: post
 comments: true
 title:  "Microsoft Office and Git"
-subtitle: "ExcelCompare, pandoc, and Python"
+subtitle: "ExcelCompare, Pandoc, and Python"
 date: 2017-06-21
 authors: jon_hill
 header-img: "img/msofficegit.jpg"
