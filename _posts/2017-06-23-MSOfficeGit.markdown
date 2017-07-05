@@ -2,7 +2,7 @@
 layout: post
 comments: true
 title:  "Microsoft Office and Git"
-subtitle: "ExcelCompare, pandoc, and more!"
+subtitle: "ExcelCompare, pandoc, and Python"
 date: 2017-06-21
 authors: jon_hill
 header-img: "img/msofficegit.jpg"
@@ -32,7 +32,7 @@ $ Binary files a/Book1.xlsx and b/Book1.xlsx differ
 
 First, [download](https://github.com/na-ka-na/ExcelCompare/releases) ExcelCompare. Place it in a path **without** spaces. You can escape spaces from Git commands, but no spaces in the path will just make your life easier. I put it in the root directory of my Git repo.
 
-Next, update your .git/config and .gitattributes files to run a custom command on Excel files when running `git diff`. Git looks in .gitattributes for rules to apply its configuration, and you need to tell it to use the "excel" method on files with xls, xlsx and xlsm file extensions. Then in .git/config, you tell Git what the "excel" method is.
+Next, update your .git/config and .gitattributes files to run a custom command on Excel files when running `git diff`. Git looks in .gitattributes for rules to apply its configuration, and you need to tell it to use the "excel" method on files with xls, xlsx and xlsm file extensions. Then in .git/config, tell Git what the "excel" method is.
 
 ### .gitattributes
 If you don't have a .gitattributes file in your repo's root directory, create one with your favorite text editor. I'm a fan of NotePad++. Add these file extensions.
