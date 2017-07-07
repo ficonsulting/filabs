@@ -45,3 +45,12 @@ scott_inouye:
   email: inouye@ficonsulting.com
   linkedin: https://www.linkedin.com/in/scott-inouye-9654235/
   pic: /img/authors/scott_inouye.jpg
+  
+
+will_bradley:
+    id: will_bradley
+    name: Will Bradley
+    title: Consultant
+    email: bradley@ficonsulting.com
+    linkedin: https://www.linkedin.com/in/will-bradley-55b13067/
+    pic: /img/authors/will_bradley.jpg

@@ -1,0 +1,10 @@
+---
+layout:     external
+title:      "Federal Credit Analytics"
+subtitle:   "Analyzing Over 20 years of Federal Credit Program Data"
+date:       2017-07-07 12:00:00
+authors:     
+  - will_bradley
+external_url: http://162.243.127.129/shiny/fcs_reestimates/
+permalink: /:title
+---
