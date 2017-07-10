@@ -1,7 +1,7 @@
 ---
 layout:     external
 title:      "Federal Credit Analytics"
-subtitle:   "Analyzing Over 20 years of Federal Credit Program Data"
+subtitle:   "Analyzing Over 20 Years of Federal Credit Program Data"
 date:       2017-07-07 12:00:00
 authors:     
   - will_bradley
