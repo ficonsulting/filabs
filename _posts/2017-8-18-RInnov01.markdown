@@ -9,11 +9,12 @@ tags: R
 header-img: "img/minnow.jpg"
 permalink: /:title
 ---
-Today, we are happy to announce RInno's first minor release. Over the past 6 months, RInno has been downloaded over [1200](http://cranlogs.r-pkg.org/badges/grand-total/RInno) times, and there are data scientists using it at the FDIC, the US Treasury and US Department of Agriculture among other large organizations. We have been getting weekly questions from the community about its features, and we even received our first question on [StackOverflow](https://stackoverflow.com/a/45700435/5490949). The most exciting development, however, is what led to this minor release.
 
-Hanjo Odendaal, a PhD student and data science consultant from South Africa, came to us with a question about how to install RStudio's newest dashboarding package, [flexdashboard](http://rmarkdown.rstudio.com/flexdashboard/). He had a fully formed idea about how he thought it should work, so I asked him if he'd like to team up and implement it together. Over the past few months, he has been an incredibly thoughtful contributor to the project and really made some solid contributions to this release.
+Today, we are happy to announce RInno's first minor release. Over the past 5 months, RInno has been downloaded over 1200 times, and there are data scientists using it at the FDIC, the US Treasury and US Department of Agriculture among other organizations. We have been getting weekly questions from the community about its features, and we even received our first question on [StackOverflow](https://stackoverflow.com/a/45700435/5490949). The most exciting development, however, is what led to this minor release.
 
-At the same time, many of the issues people submitted on [GitHub](https://github.com/ficonsulting/RInno/issues) were related to app start up instability problems. Therefore, this release includes stability improvements, which are a combination of registry queries and improvements to the Inno Setup Scripts produced by RInno. That information allows Data Scientists to focus on their work instead of fixing broken paths on various desktop configurations and administering their apps. 
+Hanjo Odendaal, a PhD student and data science consultant from South Africa, came to us with a question about how to install RStudio's newest dashboard package, [flexdashboard](http://rmarkdown.rstudio.com/flexdashboard/). He had a fully formed idea about how he thought it should work, so I asked him if he'd like to implement it together. Over the past few months, he has been an incredibly thoughtful contributor to the project and really was the chief architect of this release.
+
+At the same time, many of the issues submitted on [GitHub](https://github.com/ficonsulting/RInno/issues) were related to app start up instability problems in various shared computing envirnments and non-standard desktop configurations. Therefore, this release includes stability improvements, which are a combination of registry queries and improvements to the Inno Setup Scripts produced by RInno. That information allows Data Scientists to focus on their work instead of fixing broken paths. It also brings RInno one step closer to being enterprise ready. IT can do what they want, for the most part, and RInno should be able to handle it. 
 
 Our next release will most likely include support for OAuth2 for advanced implementations that utilize RInno's [continuous installation](https://cran.r-project.org/web/packages/RInno/vignettes/cont-installation.html) methodology, but feel free add your thoughts in the comments section below or the issues section of GitHub. We would love to hear from you.
 
@@ -36,9 +37,9 @@ compile_iss()
 {% endhighlight %}
 
 ## Flexdashboards
-Dubbed "easy interactive dashboards for R" by RStudio, flexdashboards are a hybrid between shiny apps and rmarkdown. You get the interactivity of a web application, with the statistical and data visualization power of R, managed via the simplicity of an rmarkdown document. Flexdashboards are an extremely powerful data science tool. RStudio, at this year's RStudio DevCon, said that their long-term goal is to  make them stand-alone html, css and javascript apps without an R server. This would make it possible to open them in a browser and expand their audience in many business settings. I am incredibly excited about this project and we will continue to look for ways to support it through RInno.
+Dubbed "easy interactive dashboards for R" by RStudio, flexdashboards are a hybrid between shiny apps and rmarkdown documents. You get the interactivity of a web application, with the statistical and data visualization power of R, managed via the simplicity of an rmarkdown document. Flexdashboards are an extremely powerful data science tool. At RStudio DevCon 2017, RStudio said that their long-term goal is to  make flexdashboards stand-alone html, css and JavaScript apps without an R server. This would make it possible to open them in a browser without R running and expand their audience in many business settings. I am incredibly excited about this project, and we will continue to look for ways to support it through RInno.
 
-This NBA Scoring flexdashboard is a great example of the simplicity and power of these new applications. It includes a D3 JavaScript visualization and stat table and only requires 29 lines of rmarkdown code:
+This NBA Scoring flexdashboard is a great example of the simplicity and power of these new applications. It includes a D3 JavaScript visualization and stat table, and it only requires 29 lines of rmarkdown code:
 
 <iframe width="800" height="800" src="https://beta.rstudioconnect.com/jjallaire/htmlwidgets-d3heatmap/htmlwidgets-d3heatmap.html" frameborder="0" allowfullscreen></iframe>
 
@@ -55,13 +56,17 @@ This flexdashboard will be used:
 ### Pandoc Dependency
 As many of you probably know, rmarkdown uses a universal document conversion tool called Pandoc to convert rmarkdown documents into pdf, html and Microsoft Word documents among other things. We decided to handle the Pandoc dependency like R itself. There are two arguments to manage it. The first, `include_Pandoc`, is a boolean argument that tells RInno to include Pandoc in your app's installation. The second, `Pandoc_version`, is the version of Pandoc to include. It defaults to the version of Pandoc used by the rmarkdown package in order to ensure that it is the same version of Pandoc used to develop the dashboard, but you can give it other versions if you want.
 
-Similar to the way that RInno handles R, it only installs Pandoc if a computer does not have a registry entry for Pandoc. Once the installation is complete, RInno queries the registry for Pandoc's installation path and uses it to kick off the flexdashboard. Keep in mind, this is not a version specific check because Pandoc does not have version information in its registry entry. One big difference between the Pandoc check and the R check is that if users have a different version of Pandoc installed on their computers, this check will find it, regardless of its version, and not include the version of Pandoc included with the RInno installer. We may have to release some patches to handle this differently at some point in the near future.
+Similar to the way that RInno handles R, it only installs Pandoc if a computer does not have a registry entry for Pandoc. Once the installation is complete, RInno queries the registry for Pandoc's installation path and uses it to kick off the flexdashboard. Keep in mind, this is not a version specific check because Pandoc does not have version information in its registry entry. As a result, one difference between the Pandoc check and the R check is that if users have a different version of Pandoc installed on their computers, this check will find it, regardless of its version, and not include the version of Pandoc included with the RInno installer. We may have to release some patches to handle this differently at some point in the near future.
 
 ## The Registry
-We added over 100 lines of custom Delphi Pascal code (below) to RInno installers that queries the registry and customizes installations on each machine. The helper functions determine if R and/or Pandoc are needed and modify the post installation step of Inno Setup to write a JSON file in each app's utils folder called "regpaths.json" (the old-school programmer in you should appreciate seeing JSON created by Delphi Pascal, which predates JSON by a few decades). This file is accessed throught the start up sequence to ensure that dependencies are where we think they are.
+We added over 100 lines of custom Delphi Pascal code (below) to RInno installers that queries the registry and customizes installations on each machine. The helper functions determine if R and/or Pandoc are needed and modify the post installation step of Inno Setup to write a JSON file in each app's utils folder called "regpaths.json" (the old-school programmer in you should appreciate seeing JSON created by Delphi Pascal, which predates JSON by a few decades). This file is accessed throughout the start up sequence to ensure that dependencies are where we think they are.
 
-There has been a decent amount of interest in using shared machines to install shiny apps using RInno. A few people have tested this new methodology on shared machines and found it worked out of the box, so that is a promising sign if you are interested in doing something similar at your organization.
+As we mentioned earlier, there has been a decent amount of interest in using shared machines to install shiny apps using RInno. A few people have tested this new methodology on shared machines and found it worked out of the box, so that is a promising sign if you are interested in doing something similar at your organization.
 
+### Pascal - code.iss
+This section is for the software engineer in you. If you are not curious about how the sausage is made, skip to the final thoughts section below. 
+
+First, we created constants for each of the easy registry entries (R, Chrome, Internet Explorer, and Firefox), and a variable for the registry JSON file.
 {% highlight Pascal %}
 [Code]
 const
@@ -71,7 +76,11 @@ const
   FFRegKey = 'Software\Microsoft\Windows\CurrentVersion\App Paths\firefox.exe';
 var
   RegPathsFile: string;
+{% endhighlight %}
 
+We created a series of boolean helper functions which are called using the [Check](http://www.jrsoftware.org/ishelp/index.php?topic=scriptcheck) parameter of Inno Setup. This makes it possible to copy and run the R and Pandoc executables if the registry query is successful.
+
+{% highlight Pascal %}
 // Is R installed?
 function RDetected(): boolean;
 var
@@ -88,14 +97,11 @@ function RNeeded(): Boolean;
 begin
   Result := (RDetected = false);
 end;
+{% endhighlight %}
 
-// Registry path update function (adds an extra backslash for json)
-function AddBackSlash(Value: string): string;
-begin
-  Result := Value;
-  StringChangeEx(Result, '\', '\\', True);
-end;
+Pandoc's registry entry is packed into the System PATH without the same level of specificity as the others. Detecting Pandoc is, therefore, a bit more challenging. First, Pandoc's registry entry varies on every machine because it includes the user's name. Luckily, Inno Setup has a constant called `{localappdata}`, which can be expanded into that unique entry (`PandocDir`). After that, it is possible to use the Pascal string function `Pos` to determine if that unique string has been crammed into the system path.
 
+{% highlight Pascal %}
 // Pandoc is stored in the System PATH
 function PandocDetected(): Boolean;
 var
@@ -130,7 +136,22 @@ function PandocNeeded(): Boolean;
 begin
   Result := (PandocDetected = false);
 end;
+{% endhighlight %}
 
+JScript (run.js) does not like the single slashes created by Pascal, so we use this helper function to convert each of the installation paths into paths that JScript likes.
+
+{% highlight Pascal %}
+// Registry path update function (adds an extra backslash for json)
+function AddBackSlash(Value: string): string;
+begin
+  Result := Value;
+  StringChangeEx(Result, '\', '\\', True);
+end;
+{% endhighlight %}
+
+Finally, `CurStepChanged` is a standard Inno Setup function that you can modify to customize various steps of the installation process. We want to run some queries at the end of the installation and save the results to disk using JSON. The methodology is very similar for each program. If the registry query finds something, save it to the registry file. Otherwise, save "none" in its place.
+
+{% highlight Pascal %}
 // Save installation paths to JSON
 procedure CurStepChanged(CurStep: TSetupStep);
 var
@@ -181,5 +202,7 @@ if CurStep = ssPostInstall then begin
 end;
 {% endhighlight %}
 
+It was pretty exciting to get this working because we are writing JSON to disk that JScript can read to kick off R. Once R is running, we can set the browser and tell R where we put Pandoc. Previously, JScript was doing some guess-and-check to find R and R was doing some guess-and-check to find the browser. Now, we hit the registry and use it. Otherwise, try to fail gracefully with the "none" cases.
+
 ## Final Thoughts
-Besides improving the authentication of continuous installations, we are thinking about ways to use `packrat` to isolate RInno-installed apps from the user's R package library. This and other ideas are still in their nascent stages, but I am very excited to have Hanjo on the team. If you are thinking you're not qualified, that is simply false. I was a political science major who minored in economics and women and gender studies. I spent the first half of my career working in the non-profit industry doing project management and social work... I don't speak the lingo of a computer scientist and only started programming in 2013. The more the merrier!
+Besides improving the authentication of continuous installations, we are thinking about ways to use `packrat` to isolate RInno-installed apps from the user's R package library. This and other ideas are still in their nascent stages, but I am very excited to have Hanjo on the team. If you are thinking you're not qualified to contribute, that is simply false. I was a political science major who minored in economics and women and gender studies. I spent the first half of my career working in the non-profit industry doing project management and social work... I don't speak the lingo of a computer scientist and only started programming in 2013. I am sure we could use your help.
