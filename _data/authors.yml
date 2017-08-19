@@ -17,6 +17,23 @@ jon_hill:
   github: https://github.com/Dripdrop12
   pic: /img/authors/jon_hill.jpg
   
+scott_inouye:
+  id: scott_inouye
+  name: Scott Inouye
+  title: Managing Consultant
+  email: inouye@ficonsulting.com
+  linkedin: https://www.linkedin.com/in/scott-inouye-9654235/
+  pic: /img/authors/scott_inouye.jpg
+  
+
+will_bradley:
+    id: will_bradley
+    name: Will Bradley
+    title: Consultant
+    email: bradley@ficonsulting.com
+    linkedin: https://www.linkedin.com/in/will-bradley-55b13067/
+    pic: /img/authors/will_bradley.jpg
+  
 nick_heitzman:
   id: nick_heitzman
   name: Nick Heitzman
@@ -38,19 +55,3 @@ mike_topper:
   linkedin: https://www.linkedin.com/in/mike-topper-9083b88/
   pic: /img/authors/mike_topper.jpg
   
-scott_inouye:
-  id: scott_inouye
-  name: Scott Inouye
-  title: Managing Consultant
-  email: inouye@ficonsulting.com
-  linkedin: https://www.linkedin.com/in/scott-inouye-9654235/
-  pic: /img/authors/scott_inouye.jpg
-  
-
-will_bradley:
-    id: will_bradley
-    name: Will Bradley
-    title: Consultant
-    email: bradley@ficonsulting.com
-    linkedin: https://www.linkedin.com/in/will-bradley-55b13067/
-    pic: /img/authors/will_bradley.jpg
