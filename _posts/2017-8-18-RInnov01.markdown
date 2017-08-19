@@ -12,13 +12,13 @@ permalink: /:title
 
 Today, we are happy to announce RInno's first minor release. Over the past 5 months, RInno has been downloaded over 1200 times, and there are data scientists using it at the FDIC, the US Treasury and US Department of Agriculture among other organizations. We have been getting weekly questions from the community about its features, and we even received our first question on [StackOverflow](https://stackoverflow.com/a/45700435/5490949). The most exciting development, however, is what led to this minor release.
 
-Hanjo Odendaal, a PhD student and data science consultant from South Africa, came to us with a question about how to install RStudio's newest dashboard package, [flexdashboard](http://rmarkdown.rstudio.com/flexdashboard/). He had a fully formed idea about how he thought it should work, so I asked him if he'd like to implement it together. Over the past few months, he has been an incredibly thoughtful contributor to the project and really was the chief architect of this release.
+Hanjo Odendaal, a PhD student and data science consultant from South Africa, came to us with a question about how to install RStudio's newest dashboard package, [flexdashboard](http://rmarkdown.rstudio.com/flexdashboard/). He had a fully formed idea about how he thought it should work, so I asked him if he'd like to implement it together. Over the past few months, he has been an incredibly thoughtful contributor to the project and he was the chief visionary for this release.
 
-At the same time, many of the issues submitted on [GitHub](https://github.com/ficonsulting/RInno/issues) were related to app start up instability problems in various shared computing envirnments and non-standard desktop configurations. Therefore, this release includes stability improvements, which are a combination of registry queries and improvements to the Inno Setup Scripts produced by RInno. That information allows Data Scientists to focus on their work instead of fixing broken paths. It also brings RInno one step closer to being enterprise ready. IT can do what they want, for the most part, and RInno should be able to handle it. 
+At the same time, many of the issues submitted on [GitHub](https://github.com/ficonsulting/RInno/issues) were related to app start up instability problems in various shared computing envirnments and non-standard desktop configurations. Therefore, this release includes stability improvements, which are a combination of registry queries and improvements to the Inno Setup Scripts produced by RInno. This information will allow Data Scientists to focus on their work instead of fixing broken apps. It also brings RInno one step closer to being enterprise ready. IT can do what they want, for the most part, and RInno should be able to handle it. 
 
 Our next release will most likely include support for OAuth2 for advanced implementations that utilize RInno's [continuous installation](https://cran.r-project.org/web/packages/RInno/vignettes/cont-installation.html) methodology, but feel free add your thoughts in the comments section below or the issues section of GitHub. We would love to hear from you.
 
-## Minimal Example
+## New Feature
 
 {% highlight r %}
 # Create an example flexdashboard in the "app" directory
@@ -26,7 +26,7 @@ example_app(
 	app_dir = "app", 
 	type = "flexdashboard")
 	
-# Build an RInno installation framework
+# Build an RInno installation framework w/ Pandoc
 create_app(
 	app_name = "myapp", 
 	app_dir = "app", 
@@ -35,6 +35,8 @@ create_app(
 # Compile the installer with Inno Setup
 compile_iss()
 {% endhighlight %}
+
+If you are familiar with RInno, this should look almost exactly the same as compiling a shiny app installer. Hanjo has abstracted away the framework differences so that RInno supports flexdashboards behind the scenes. You don't need to change your workflow or learn too many new things to use RInno with your flexdashboards.
 
 ## Flexdashboards
 Dubbed "easy interactive dashboards for R" by RStudio, flexdashboards are a hybrid between shiny apps and rmarkdown documents. You get the interactivity of a web application, with the statistical and data visualization power of R, managed via the simplicity of an rmarkdown document. Flexdashboards are an extremely powerful data science tool. At RStudio DevCon 2017, RStudio said that their long-term goal is to  make flexdashboards stand-alone html, css and JavaScript apps without an R server. This would make it possible to open them in a browser without R running and expand their audience in many business settings. I am incredibly excited about this project, and we will continue to look for ways to support it through RInno.
@@ -59,7 +61,7 @@ As many of you probably know, rmarkdown uses a universal document conversion too
 Similar to the way that RInno handles R, it only installs Pandoc if a computer does not have a registry entry for Pandoc. Once the installation is complete, RInno queries the registry for Pandoc's installation path and uses it to kick off the flexdashboard. Keep in mind, this is not a version specific check because Pandoc does not have version information in its registry entry. As a result, one difference between the Pandoc check and the R check is that if users have a different version of Pandoc installed on their computers, this check will find it, regardless of its version, and not include the version of Pandoc included with the RInno installer. We may have to release some patches to handle this differently at some point in the near future.
 
 ## The Registry
-We added over 100 lines of custom Delphi Pascal code (below) to RInno installers that queries the registry and customizes installations on each machine. The helper functions determine if R and/or Pandoc are needed and modify the post installation step of Inno Setup to write a JSON file in each app's utils folder called "regpaths.json" (the old-school programmer in you should appreciate seeing JSON created by Delphi Pascal, which predates JSON by a few decades). This file is accessed throughout the start up sequence to ensure that dependencies are where we think they are.
+We added over 100 lines of custom Delphi Pascal code (below) which queries the registry and customizes installations on each machine. The helper functions determine if R and/or Pandoc are needed and modify the post installation step of Inno Setup to write a JSON file in each app's utils folder called "regpaths.json" (the old-school programmer in you should appreciate seeing JSON created by Delphi Pascal, which predates JSON by a few decades). This file is accessed throughout the start up sequence to ensure that dependencies are where we think they are.
 
 As we mentioned earlier, there has been a decent amount of interest in using shared machines to install shiny apps using RInno. A few people have tested this new methodology on shared machines and found it worked out of the box, so that is a promising sign if you are interested in doing something similar at your organization.
 

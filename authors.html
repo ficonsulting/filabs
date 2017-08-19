@@ -19,7 +19,12 @@ header-img: "img/authors.jpg"
 			{{ author[1].name }}<br>
 		{% endif %}
 		
-		<strong>Posts:</strong><br>
+		{% if author[1].github.size > 0 %}
+			<a href="{{ author[1].github }}">GitHub <i class="fa fa-github" aria-hidden="true"></i></a> | 
+		{% endif %}
+		<a href="{{ author[1].linkedin }}">Linked <i class="fa fa-linkedin-square" aria-hidden="true"></i></a>
+		
+		<br><strong>Posts:</strong><br>
 		<ul>
 			{% for post in site.posts %}
 				{% if post.authors contains author[1].id %}
@@ -27,10 +32,6 @@ header-img: "img/authors.jpg"
 				{% endif %}
 			{% endfor %}
 		</ul>
-		{% if author[1].github.size > 0 %}
-			<a href="{{ author[1].github }}">GitHub <i class="fa fa-github" aria-hidden="true"></i></a> | 
-		{% endif %}
-		<a href="{{ author[1].linkedin }}">Linked <i class="fa fa-linkedin-square" aria-hidden="true"></i></a>
 	</div>
 	<!-- This makes sure the hr tags behave well in all sizes and don't duplicate the bottom one -->
 	{% if forloop.length != forloop.index %}<hr class="hidden-lg"> {% endif %}
