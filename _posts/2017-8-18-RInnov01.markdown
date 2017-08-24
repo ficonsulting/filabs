@@ -10,7 +10,7 @@ header-img: "img/minnow.jpg"
 permalink: /:title
 ---
 
-Today, we are happy to announce RInno's first minor release. Over the past 5 months, RInno has been downloaded over 1300 times. Data scientists use it at the FDIC, the US Treasury and the US Department of Agriculture among other organizations to install shiny apps on desktop computers. We have been getting weekly questions about RInno's features and use cases, and we received our first question on [StackOverflow](https://stackoverflow.com/a/45700435/5490949). The most exciting development, however, is what led to today's minor release.
+Today, we are happy to announce RInno's first minor release. Over the past 5 months, RInno was downloaded over thirteen-hundred times. Data scientists used it at the FDIC, the US Treasury and the US Department of Agriculture among other organizations to install shiny apps on desktop computers. We received weekly questions about RInno's features and use cases, and our first question on [StackOverflow](https://stackoverflow.com/a/45700435/5490949). The most exciting development, however, is what led to today's minor release.
 
 Hanjo Odendaal, a PhD student and data science consultant from South Africa, came to us with a question about how to install RStudio's newest dashboard package, [flexdashboard](http://rmarkdown.rstudio.com/flexdashboard/). He had a fully formed idea about how it could work, so I asked him if he'd like to implement it together. Over the past few months, he has been an incredibly thoughtful contributor to the project, and he is the chief visionary for this release.
 
