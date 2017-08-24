@@ -62,7 +62,7 @@ layout: default
         <div class="row">
 			
 			<div class="col-lg-2 col-md-1"> <!-- Instead of having a column offset class, I added a column where we can put images -->
-				{% if page.title == 'RInno' %}
+				{% if page.title contains 'RInno' %}
 				<br>
 				<img src="{{ site.baseurl }}/img/RInno.png" class="img-responsive" width="100px" position="absolute">
 				{% endif %}
