@@ -10,13 +10,13 @@ header-img: "img/minnow.jpg"
 permalink: /:title
 ---
 
-Today, we are happy to announce RInno's first minor release. Over the past 5 months, RInno has been downloaded over 1200 times. Data scientists use it at the FDIC, the US Treasury and US Department of Agriculture among other organizations to install shiny apps on desktop computers. We have been getting weekly questions from the community about its features, and we even received our first question on [StackOverflow](https://stackoverflow.com/a/45700435/5490949). The most exciting development, however, is what led to today's minor release.
+Today, we are happy to announce RInno's first minor release. Over the past 5 months, RInno has been downloaded over 1200 times. Data scientists use it at the FDIC, the US Treasury and US Department of Agriculture among other organizations to install shiny apps on desktop computers. We have been getting weekly questions about its features and use cases, and we received our first question on [StackOverflow](https://stackoverflow.com/a/45700435/5490949). The most exciting development, however, is what led to today's minor release.
 
 Hanjo Odendaal, a PhD student and data science consultant from South Africa, came to us with a question about how to install RStudio's newest dashboard package, [flexdashboard](http://rmarkdown.rstudio.com/flexdashboard/). He had a fully formed idea about how it could work, so I asked him if he'd like to implement it together. Over the past few months, he has been an incredibly thoughtful contributor to the project, and he is the chief visionary for this release.
 
 At the same time, many of the issues submitted on [GitHub](https://github.com/ficonsulting/RInno/issues) were related to app start up instability problems in various shared computing envirnments and non-standard desktop configurations. Therefore, this release includes stability improvements, which are a combination of registry queries and improvements to the Inno Setup Scripts produced by RInno. This information will allow Data Scientists to focus on their work instead of fixing broken apps. It also brings RInno one step closer to being enterprise ready. IT can do what they want, for the most part, and RInno should be able to handle what they throw at it. 
 
-Our next release will most likely include support for OAuth2 for advanced implementations that utilize RInno's [continuous installation](https://cran.r-project.org/web/packages/RInno/vignettes/cont-installation.html) methodology, but feel free add your thoughts in the comments section below or the issues section of GitHub. We will address community needs with each release, so please tell us about things you want RInno to support.
+Our next release will most likely include support for OAuth2 for advanced implementations that utilize RInno's [continuous installation](https://cran.r-project.org/web/packages/RInno/vignettes/cont-installation.html) methodology, but feel free add your thoughts in the comments section below or the issues section of GitHub. Each release will address community needs, so please tell us what you want RInno to support.
 
 ## Newest Feature - flexdashboard support
 
@@ -36,16 +36,16 @@ create_app(
 compile_iss()
 {% endhighlight %}
 
-If you are familiar with RInno, this should look almost exactly the same as compiling a shiny app installer. Hanjo has abstracted away the differences so that RInno supports flexdashboards behind the scenes. You don't need to change your workflow or learn too many new things to use RInno with your flexdashboards.
+If you are familiar with RInno, this is almost exactly the same as compiling a shiny app installer. Hanjo has abstracted away the differences between shiny apps and flexdashboards so that RInno supports flexdashboards seamlessly. There is no need to change your workflow or learn new arguments to use RInno with your flexdashboards.
 
 ## Flexdashboards
-Dubbed "easy interactive dashboards for R" by RStudio, flexdashboards are a hybrid between shiny apps and rmarkdown documents. You get the interactivity of a web application, with the statistical and data visualization power of R, managed via the simplicity of an rmarkdown document. Flexdashboards are an extremely powerful data science tool. At RStudio DevCon 2017, RStudio said that their long-term goal is to  make flexdashboards stand-alone html, css and JavaScript apps without an R server. This would make it possible to open them in a browser without R running and expand their audience in many business settings. I am incredibly excited about this project, and we will continue to look for ways to support it through RInno.
+Dubbed "easy interactive dashboards for R" by RStudio, flexdashboards are a hybrid between shiny apps and rmarkdown documents. They provide the interactivity of a web application, with the statistical and data visualization power of R, managed via the simplicity of an rmarkdown document. Flexdashboards are an extremely powerful data science tool. At RStudio DevCon 2017, RStudio said that their long-term goal is to  make flexdashboards stand-alone html, css and JavaScript apps without an R server. This would make it possible to open them in a browser without R running and expand their audience in many business settings. I am incredibly excited about this project, and we will continue to look for ways to support it through RInno.
 
 This NBA Scoring flexdashboard is a great example of the simplicity and power of these new applications. It includes a D3 JavaScript visualization and stat table, and it only requires 29 lines of rmarkdown code:
 
 <iframe width="800" height="800" src="https://beta.rstudioconnect.com/jjallaire/htmlwidgets-d3heatmap/htmlwidgets-d3heatmap.html" frameborder="0" allowfullscreen></iframe>
 
-You can see why the first thing Hanjo asked about RInno was: "Can I use flexdashboards?" Well, thanks to him, now you can.
+This is why the first thing Hanjo asked about RInno was: "Can I use flexdashboards?" Well, thanks to him, now you can.
 
 ### Flexdashboard Check
 When `create_app` is called, RInno now runs Hanjo's `flexdashboard_check` to determine if your app is a flexdashboard. If it is, then `flexdashboard` and `rmarkdown` are added to your app's R package dependency list and RInno prints a message to the R console to communicate its findings.
@@ -204,7 +204,7 @@ if CurStep = ssPostInstall then begin
 end;
 {% endhighlight %}
 
-It was pretty exciting to get this working because we are writing JSON to disk that JScript can read to kick off R. Once R is running, we can set the browser and tell R where we put Pandoc. Previously, JScript was doing some guess-and-check to find R and R was doing some guess-and-check to find the browser. Now, we hit the registry and use it. Otherwise, try to fail gracefully with the "none" cases.
+It was pretty exciting to get this working because these procedures are writing JSON to disk in a way that JScript can understand and start an R session reliably. Once R is running, app.R sets the browser option and tells R where Pandoc is installed. Previously, JScript was doing some guess-and-check to find R and R was doing some guess-and-check to find the browser. Now, the registry provides the information RInno needs. Otherwise, it fails gracefully using the "none" cases.
 
 ## Final Thoughts
-Besides improving the authentication of continuous installations, we are thinking about ways to use `packrat` to isolate RInno-installed apps from the user's R package library. This and other ideas are still in their nascent stages, but I am very excited to have Hanjo on the team. If you are thinking you're not qualified to contribute, that is simply false. I was a political science major who minored in economics and women and gender studies. I spent the first half of my career working in the non-profit industry doing project management and social work... I don't speak the lingo of a computer scientist and only started programming in 2013. I am sure we could use your help.
+Along with improving the authentication of continuous installations, we are planning to use `packrat` to isolate RInno-installed apps from each user's R package library. This, and other possible features, are in their nascent stages, but I am very excited to have Hanjo on the team. If you think you're not qualified to contribute, that is simply false. I was a political science major who minored in economics and women and gender studies, and then I spent the first half of my career working in the non-profit industry doing project management and social work... I am not a computer scientist and only started doing real data science work in 2013. I am sure we could use your help.
