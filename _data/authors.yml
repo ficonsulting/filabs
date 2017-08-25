@@ -54,4 +54,12 @@ mike_topper:
   name: Mike Topper
   linkedin: https://www.linkedin.com/in/mike-topper-9083b88/
   pic: /img/authors/mike_topper.jpg
+
+jon_crandall:
+  id: jon_crandall
+  name: Jon Crandall
+  title: Managing Consultant
+  email: crandall@ficonsulting.com
+  linkedin: https://www.linkedin.com/in/jonathancrandall/
+  pic: /img/authors/scott_inouye.jpg
   

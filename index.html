@@ -4,59 +4,129 @@ description: "Research and Development Division of FI Consulting"
 ---
 <!-- Find author count -->
 {% assign authorCount = page.authors | size %}
+	<div id="exTab2" class="container col-lg-9" style="min-height:200px;">	
+		<ul class="nav nav-tabs">
+			<li class="active">
+				<a  href="#1" data-toggle="tab">Demos</a>
+			</li>
+			<li>
+				<a href="#2" data-toggle="tab">Technical Blogs</a>
+			</li>
+		</ul>
+		<div class="tab-content">
+			<div class="tab-pane active" id="1">
+				<div>
+					{% for post in paginator.posts %}
+					{% if post.type != "Blog" %}
+					<div class="post-preview">
+						<a href="{{ post.url | prepend: site.baseurl }}">
+							<h2 class="post-title"> {{ post.title }} </h2>
+							{% if post.subtitle %}
+								<h3 class="post-subtitle"> {{ post.subtitle }} </h3>
+							{% endif %}
+						</a>
+						<p class="post-meta">Posted by 							
+										{% if authorCount == 1 %}
+											{% assign author = site.data.authors[post.authors] %}
+											<a href="{{ author.linkedin }}">{{ author.name }}</a>
+											
+										{% else if authorCount > 1 %}
+											{% for author in post.authors %}
+												{% if forloop.first %}
+													<a href="{{ site.data.authors[author].linkedin }}">
+														{{ site.data.authors[author].name }}
+													</a>
+												{% elsif forloop.last %}
+													and 
+													<a href="{{ site.data.authors[author].linkedin }}">
+														{{ site.data.authors[author].name }}
+													</a>
+												{% else %}
+													, 
+													<a href="{{ site.data.authors[author].linkedin }}">
+														{{ site.data.authors[author].name }}
+													</a>
+												{% endif %}
+											{% endfor %}
+										
+										{% else %}
+											{{ site.title }}
+											
+										{% endif %} on {{ post.date | date: "%B %-d, %Y" }} 
+										
+										{% if post.comments %} 
+											• <a href="{{ post.url | prepend: site.baseurl }}#disqus_thread" data-disqus-identifier="{{ post.id }}">Comments</a>
+										{% endif %}
+						</p>
+					</div>
+					{% if forloop.length != forloop.index %} <hr> {% endif %}
+					{% endif %}
+					{% endfor %}
+				</div>
 
-<div class="col-lg-9">
-    {% for post in paginator.posts %}
-    <div class="post-preview">
-        <a href="{{ post.url | prepend: site.baseurl }}">
-            <h2 class="post-title"> {{ post.title }} </h2>
-            {% if post.subtitle %}
-				<h3 class="post-subtitle"> {{ post.subtitle }} </h3>
-            {% endif %}
-        </a>
-        <p class="post-meta">Posted by 							
-						{% if authorCount == 1 %}
-							{% assign author = site.data.authors[post.authors] %}
-							<a href="{{ author.linkedin }}">{{ author.name }}</a>
-							
-						{% else if authorCount > 1 %}
-							{% for author in post.authors %}
-								{% if forloop.first %}
-									<a href="{{ site.data.authors[author].linkedin }}">
-										{{ site.data.authors[author].name }}
-									</a>
-								{% elsif forloop.last %}
-									and 
-									<a href="{{ site.data.authors[author].linkedin }}">
-										{{ site.data.authors[author].name }}
-									</a>
-								{% else %}
-									, 
-									<a href="{{ site.data.authors[author].linkedin }}">
-										{{ site.data.authors[author].name }}
-									</a>
-								{% endif %}
-							{% endfor %}
-						
-						{% else %}
-							{{ site.title }}
-							
-						{% endif %} on {{ post.date | date: "%B %-d, %Y" }} 
-						
-						{% if post.comments %} 
-							• <a href="{{ post.url | prepend: site.baseurl }}#disqus_thread" data-disqus-identifier="{{ post.id }}">Comments</a>
-						{% endif %}
-        </p>
-    </div>
-    {% if forloop.length != forloop.index %} <hr> {% endif %}
-    {% endfor %}
+			</div>
+		<div class="tab-pane" id="2">
+			<div>
+					{% for post in paginator.posts %}
+					{% if post.type == "Blog" %}
+					<div class="post-preview">
+						<a href="{{ post.url | prepend: site.baseurl }}">
+							<h2 class="post-title"> {{ post.title }} </h2>
+							{% if post.subtitle %}
+								<h3 class="post-subtitle"> {{ post.subtitle }} </h3>
+							{% endif %}
+						</a>
+						<p class="post-meta">Posted by 							
+										{% if authorCount == 1 %}
+											{% assign author = site.data.authors[post.authors] %}
+											<a href="{{ author.linkedin }}">{{ author.name }}</a>
+											
+										{% else if authorCount > 1 %}
+											{% for author in post.authors %}
+												{% if forloop.first %}
+													<a href="{{ site.data.authors[author].linkedin }}">
+														{{ site.data.authors[author].name }}
+													</a>
+												{% elsif forloop.last %}
+													and 
+													<a href="{{ site.data.authors[author].linkedin }}">
+														{{ site.data.authors[author].name }}
+													</a>
+												{% else %}
+													, 
+													<a href="{{ site.data.authors[author].linkedin }}">
+														{{ site.data.authors[author].name }}
+													</a>
+												{% endif %}
+											{% endfor %}
+										
+										{% else %}
+											{{ site.title }}
+											
+										{% endif %} on {{ post.date | date: "%B %-d, %Y" }} 
+										
+										{% if post.comments %} 
+											• <a href="{{ post.url | prepend: site.baseurl }}#disqus_thread" data-disqus-identifier="{{ post.id }}">Comments</a>
+										{% endif %}
+						</p>
+					</div>
+					{% if forloop.length != forloop.index %} <hr> {% endif %}
+					{% endif %}
+					{% endfor %}
+				</div>
+		</div>
+		
+	</div>
 </div>
 <div class="col-lg-3 hidden-print hidden-xs hidden-sm hidden-md" id="sidebar">
   {% include blogroll.html %}
+</div>  
 </div>
+
 
 <!-- Include Disqus comment count -->
 <script id="dsq-count-scr" src="//https-ficonsulting-github-io.disqus.com/count.js" async></script>
+
 
 <!-- Pager -->
 {% if paginator.total_pages > 1 %}
