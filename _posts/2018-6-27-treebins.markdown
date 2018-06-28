@@ -3,7 +3,7 @@ layout: post
 comments: true
 title:  "tree.bins 0.1.1"
 subtitle: "Recategorization by Decision Tree Method"
-date:   2018-06-28 06:09:19 -0500
+date:   2018-06-27 12:05:19 -0500
 authors: piro_polo
 tags: R
 header-img: "img/tree.bins/tree.jpg"
