@@ -3,7 +3,7 @@ layout: post
 comments: true
 title:  "tree.bins 0.1.1"
 subtitle: "Recategorization by Decision Tree Method"
-date:   2018-06-13 06:09:19 -0500
+date:   2018-06-28 06:09:19 -0500
 authors: piro_polo
 tags: R
 header-img: "img/tree.bins/tree.jpg"
@@ -84,7 +84,7 @@ levels(sample.df$Neighborhood) #current levels of Neighborhood
 unique(binned.df$Neighborhood) #new levels of Neighborhood
 {% endhighlight %}
 
-|        Old Column Names ||
+|        Old Levels ||
 ---------|---------|---------|---------|---------|
  Blmngtn | Blueste | BrDale  | BrkSide | ClearCr | 
  CollgCr | Crawfor | Edwards | Gilbert | Greens  | 
@@ -92,7 +92,7 @@ unique(binned.df$Neighborhood) #new levels of Neighborhood
  OldTown | Sawyer  | SawyerW | Somerst | StoneBr | 
  SWISU   | Timber  | Veenker |         |         | 
 
-| New Column Names |||||
+| New Levels |||||
 |--------|---------|--------|--------|--------|
 | bin#.4 | bin#.3  | bin#.5 | bin#.2 | bin#.1 | 
 
@@ -151,7 +151,7 @@ The "lkup.list" returns a list of the lookup tables.
 {% highlight r %}
 lookup.list <- tree.bins(data = sample.df, y = SalePrice, bin.nm = "bin#.", 
  		         control = rpart.control(cp = .01), return = "lkup.list")
-head(lookup.list[[1]])
+head(lookup.list[[1]]) #displaying the first object in the list
 {% endhighlight %}
 
 | Neighborhood | Categories | 
@@ -169,7 +169,7 @@ The "both" returns an object containing both the new.fctrs and lkup.list outputs
 both <- tree.bins(data = sample.df, y = SalePrice, bin.nm = "bin#.", 
  		  control = rpart.control(cp = .01), return = "both")
 head(both$new.fctrs)
-head(both$lkup.list[2])
+head(both$lkup.list[2]) 
 {% endhighlight %}
 
 | SalePrice | Neighborhood | MS.Zoning |
@@ -209,6 +209,6 @@ head(oth.binned.df)
 | 191500    | bin#.5       | bin#.2    |
 | 236500    | bin#.5       | bin#.2    |
 
-## Closing Thoughts
+## Closing Remarks
 I hope that the tree.bins package will be able to assist you in your future data analysis and modeling needs. Please feel free to post any issues that you may encounter or simply keep up with the latest changes and updates at [GitHub](https://github.com/pikos90/tree.bins).
 

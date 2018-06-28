@@ -1,4 +1,13 @@
 # Author details.
+piro_polo:
+  id: piro_polo
+  name: Piro Polo
+  title: Senior Consultant
+  email: ppolo@ficonsulting.com
+  linkedin: https://www.linkedin.com/in/piro-polo-415a6924
+  github: https://github.com/pikos90
+  pic: /img/authors/piro_polo.jpg
+
 david_leonard:
   id: david_leonard
   name: David Leonard
