@@ -16,15 +16,6 @@ jon_hill:
   linkedin: https://www.linkedin.com/in/jonmarkhill/
   github: https://github.com/Dripdrop12
   pic: /img/authors/jon_hill.jpg
-  
-scott_inouye:
-  id: scott_inouye
-  name: Scott Inouye
-  title: Managing Consultant
-  email: inouye@ficonsulting.com
-  linkedin: https://www.linkedin.com/in/scott-inouye-9654235/
-  pic: /img/authors/scott_inouye.jpg
-  
 
 will_bradley:
     id: will_bradley
@@ -33,25 +24,3 @@ will_bradley:
     email: bradley@ficonsulting.com
     linkedin: https://www.linkedin.com/in/will-bradley-55b13067/
     pic: /img/authors/will_bradley.jpg
-  
-nick_heitzman:
-  id: nick_heitzman
-  name: Nick Heitzman
-  title: Managing Consultant, Data Science
-  email: heitzman@ficonsulting.com
-  linkedin: https://www.linkedin.com/in/nick-heitzman/
-  github: https://github.com/NickDoesData
-  pic: /img/authors/nick_heitzman.jpg
-  
-jessica_gibas:
-  id: jessica_gibas
-  name: Jessica Gibas
-  linkedin: https://www.linkedin.com/in/jessica-gibas-71268310/
-  pic: /img/authors/jessica_gibas.jpg
-  
-mike_topper:
-  id: mike_topper
-  name: Mike Topper
-  linkedin: https://www.linkedin.com/in/mike-topper-9083b88/
-  pic: /img/authors/mike_topper.jpg
-  
