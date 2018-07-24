@@ -105,7 +105,7 @@ binned.df2 <- tree.bins(data = sample.df, y = SalePrice,
 		       #displays new levels of Neighborhood
 {% endhighlight %}
 
-You can also create a two-dimensinal `data.frame` and pass this object into the control parameter. The first column must contain the variable name(s) that are contained in the `data.frame` specified in the data parameter. The second column must contain the cp values of the respective variable name(s). Any variable name(s) not included in your `data.frame` will use the generated cp value within the `rpart` function. Lastly, the column names identified in your created `data.frame` are irrelevant, only the elements are important.
+You can also create a two-dimensional `data.frame` and pass this object into the control parameter. The first column must contain the variable name(s) that are contained in the `data.frame` specified in the data parameter. The second column must contain the cp values of the respective variable name(s). Any variable name(s) not included in your `data.frame` will use the generated cp value within the `rpart` function. Lastly, the column names identified in your created `data.frame` are irrelevant, only the elements are important.
 
 {% highlight r %}
 cp.df <- data.frame(Variables = c("Neighborhood", "MS.Zoning"), CP = c(.001, .1))
